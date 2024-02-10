@@ -1,0 +1,7 @@
+Options and need to do POCs / more research
+
+1. Server Side Events: send data to client from server. Probably serverless computer and deploy with vercel.
+2. 2 repos - one for server and one for client. Deploy separately
+3. Use React Query, SWR, custom polling, or something else to get the latest data. Serverless compute and deploy with vercel.
+4. Use useSWRSubscription and have a websocket. Keep it all in nextJS. Serverless compute and deploy with vercel. (not sure this is what useSWR is built for)
+5. 1 repo and deploy server and client separately
