@@ -8,9 +8,9 @@ const TestRoute = () => {
   const getTestData = async () => {
     try {
       const response = await fetch('/api/test');
-      console.log('fetch response', response);
+      // console.log('fetch response', response);
       const data = await response.json();
-      console.log('data.message: ', data.message);
+      // console.log('data.message: ', data.message);
       setTest(data.message);
     } catch (error) {
       console.error(error);
