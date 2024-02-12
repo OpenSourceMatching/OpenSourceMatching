@@ -1,5 +1,5 @@
 import React from 'react'
-import TestRoute from '@/components/TestRoute'
+import TestRoute from '@app/components/TestRoute'
 
 const page = () => {
   return (
