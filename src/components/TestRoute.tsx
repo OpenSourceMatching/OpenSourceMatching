@@ -7,10 +7,11 @@ const TestRoute = () => {
   
   const getTestData = async () => {
     try {
-      const response = await fetch(`${process.env.SERVER || 'http://localhost:8080' + '/api/test'}`);
+      const response = await fetch('/api/test');
+      // console.log('fetch response', response);
       const data = await response.json();
-      setTest(data);
-      console.log(data);
+      // console.log('data.message: ', data.message);
+      setTest(data.message);
     } catch (error) {
       console.error(error);
     }
@@ -21,7 +22,7 @@ const TestRoute = () => {
   }, []);
 
   return (
-    <div>{test.toString()}</div>
+    <div>{test}</div>
   )
 }
 
