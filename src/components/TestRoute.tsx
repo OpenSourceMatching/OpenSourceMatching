@@ -7,7 +7,7 @@ const TestRoute = () => {
   
   const getTestData = async () => {
     try {
-      const response = await fetch(`${process.env.SERVER || 'http://localhost:8080' + '/api/test'}`);
+      const response = await fetch('/api/hello');
       const data = await response.json();
       setTest(data);
       console.log(data);
