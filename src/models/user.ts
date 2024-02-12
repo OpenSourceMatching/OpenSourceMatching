@@ -35,6 +35,7 @@ const userSchema = new mongoose.Schema({
 
 });
 
-const User = mongoose.model("User", userSchema);
+// this or statement handles if the model is already defined
+const User = mongoose.models.User || mongoose.model("User", userSchema);
 
 export default User;
