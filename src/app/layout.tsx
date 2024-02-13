@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import StyledComponentsRegistry from './lib/registry'
+import Navbar from "@components/Navbar";
+import Footer from "@components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Open Source Match",
-  description: "Find Open Source Devs",
+  description: "Find Devs for Your Open Source Product",
 };
 
 export default function RootLayout({
@@ -19,7 +21,9 @@ export default function RootLayout({
     <html>
       <body>
         <StyledComponentsRegistry>
-          {children}
+          <Navbar />
+            {children}
+          <Footer />
         </StyledComponentsRegistry>
       </body>
     </html>
