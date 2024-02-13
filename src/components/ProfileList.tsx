@@ -1,15 +1,16 @@
 'use client';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Suspense } from 'react'
 import ProfileCard from './ProfileCard'
 import styled from 'styled-components';
 
+const Container = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5rem;
+  flex-grow: 1;
+  border: 2px solid red;
+`;
 const ProfileList = () => {
-  const Container = styled.div`
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 5rem;
-    flex-grow: 1;
-  `;
 
   type Users = {
     id: number;
@@ -31,9 +32,9 @@ const ProfileList = () => {
  
   return (
     <>
-      <Container>
-        {userList}
-      </Container>
+        <Container>
+          {userList}
+        </Container>
     </>
   )
 }

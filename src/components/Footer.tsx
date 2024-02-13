@@ -3,13 +3,13 @@
 import React from 'react'
 import styled from 'styled-components'
 
+const FooterStyle = styled.div`
+  background-color: slategray;
+  height: 100px;
+`;
 const Footer = () => {
-  const Footer = styled.div`
-    background-color: slategray;
-    height: 100px;
-  `;
   return (
-    <Footer>Footer</Footer>
+    <FooterStyle>Footer</FooterStyle>
   )
 }
 
