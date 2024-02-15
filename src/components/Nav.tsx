@@ -7,8 +7,8 @@ const Nav = () => {
   // useSession is a hook that returns an object with the session and status. It can only be used client side
   const { data: session, status } = useSession();
 
-  console.log('status: ', status);
-  console.log('session: ', session);
+  // console.log('status: ', status);
+  // console.log('session: ', session);
   return (
     <div>
       <h1>Nav Bar Test</h1>
