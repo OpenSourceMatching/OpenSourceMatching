@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react'
 import styled from 'styled-components'
 
@@ -15,7 +17,6 @@ const ProfileCard = ({user}) => {
         <img 
           src={"#" || 'default-image.jpg'} 
           alt="profile image" 
-          style={{ width: '100%', height: 'auto', borderRadius: '4px', margin: '0 auto' }}
         />
         <div>Name: {user.name}</div>
         <div>Email: {user.email}</div>

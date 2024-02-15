@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useEffect, useState, Suspense } from 'react'
 import ProfileCard from './ProfileCard'
 import styled from 'styled-components';
