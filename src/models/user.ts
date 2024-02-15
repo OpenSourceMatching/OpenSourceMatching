@@ -10,11 +10,10 @@ const messageSchema = new mongoose.Schema({
 const userSchema = new mongoose.Schema({
   // login info
   email: { type: String, required: true },
-  password: { type: String}, // not sure descipe will even require a password
+  name: { type: String},
+  image: { type: String },
 
   // personal info
-  firstName: { type: String,},
-  lastName: { type: String},
   linkedIn: { type: String},
   github: { type: String},
   personalWebsite: { type: String},

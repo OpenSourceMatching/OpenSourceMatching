@@ -1,8 +1,12 @@
 import { NextAuthOptions } from "next-auth"
+import User from "@/models/User";
+import { connectToMongo } from "./mongoConnection";
 
 // Overview here:
 // https://www.descope.com/blog/post/auth-nextjs13-app-nextauth
+// https://docs.descope.com/build/guides/session/client#NextJS
 
+// Used "sign-up-or-in" flow in env variables
 export const authOptions: NextAuthOptions = {
   providers: [
     {
@@ -24,5 +28,36 @@ export const authOptions: NextAuthOptions = {
         }
       },
     },
-  ]
+  ],
+  callbacks: {
+    async signIn( {profile} ) {
+      console.log('profile: ', profile);
+      if (!profile?.email) {
+        return false;
+      }
+
+      try {
+        // connect to mongo
+        await connectToMongo();
+        
+        // Check if user is already in the database and create if not
+        const user = await User.findOne({ email: profile.email });
+        
+        if (!user) {
+          await User.create({
+            email: profile.email,
+            name: profile.name,
+            image: profile.image,
+          });
+        }
+
+        return true;
+      } catch (error) {
+
+        console.error(error);
+        return false;
+      }
+
+    }
+  }
 }
