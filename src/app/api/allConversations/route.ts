@@ -2,14 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import User from "@/models/user";
 import { connectToMongo } from "@/utils/mongoConnection";
 
-type conversationType = {
+type mesType = {
   otherUser: String,
-  type: {
+  conversation: {
     message: String
     date: Date,
     isUserSender: Boolean,
-  }
-  default: [],
+  }[]
 }
 
 // return all conversations and the last message in each conversation
@@ -41,27 +40,25 @@ export const GET = async (req: NextRequest) => {
       });
     }
 
-    // 
-    if (userDetails) {
-      const messages = userDetails.messages.map(conversation => {
-        const lastMessage = conversation.messages[conversation.messages.length - 1];
+    // Need to map over messages and get the last message in each conversation and the other user's name
+    // if (userDetails) {
+    //   const messages = userDetails.messages.map(mes:mesType => {
+    //     const lastMessage = mes.messages[mes.messages.length - 1];
   
-        return {
-          otherUser: conversation.otherUser,
-          lastMessage,
-        };
-      });
+    //     return {
+    //       otherUser: mes.otherUser,
+    //       lastMessage,
+    //     };
+    //   });
 
       // return user data
       return NextResponse.json(userDetails, { status: 200 });
-    }
 
+    } catch (error: any) {
+      console.error("Error in api/profile GET: ", error);
 
-  } catch (error: any) {
-    console.error("Error in api/profile GET: ", error);
-
-    return NextResponse.json({ message: error.message }, {
-      status: 500,
-    });
+      return NextResponse.json({ message: error.message }, {
+        status: 500,
+      });
   }
 };
