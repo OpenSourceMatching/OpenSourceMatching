@@ -7,7 +7,7 @@ type ProviderProps = {
   children: React.ReactNode
 }
 
-const Provider:React.FC<ProviderProps> = ( {children}) => {
+const NextAuthSessionProvider:React.FC<ProviderProps> = ( {children}) => {
   return (
     <SessionProvider>
       {children}
@@ -15,4 +15,4 @@ const Provider:React.FC<ProviderProps> = ( {children}) => {
   )
 }
 
-export default Provider
+export default NextAuthSessionProvider
