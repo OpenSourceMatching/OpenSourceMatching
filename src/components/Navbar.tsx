@@ -12,15 +12,17 @@ const NavContainer = styled.header`
   align-items: center;
   padding: 0 20px;
 `;
-
+const NavItem = styled.span`
+  margin: 0 10px
+`;
 const Navbar = () => {
 
   return (
     <>
       <NavContainer>
-        <Link href="./">Home</Link>
-        <Link href="./profile">Profile</Link>
-        <Link href="./messages">Messages</Link>
+        <Link href="./"><NavItem>Home</NavItem></Link>
+        <Link href="./profile"><NavItem>Profile</NavItem></Link>
+        <Link href="./messages"><NavItem>Messages</NavItem></Link>
       </NavContainer>
     </>
   )

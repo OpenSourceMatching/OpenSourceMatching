@@ -6,7 +6,7 @@ import styled from 'styled-components'
 const SearchInput = styled.input`
   width: 100%;
   margin: 0 auto;
-  max-width: 400px; 
+  max-width: 500px; 
   padding: 10px 20px;
   border: 1px solid #ccc; 
   border-radius: 8px; 
@@ -31,7 +31,7 @@ const SearchBar = () => {
  
   return (
     <>
-      <form style={{border: '2px solid green'}}>
+      <form style={{ textAlign: 'center' }}>
         <label
           htmlFor='search-input'
         >

@@ -7,9 +7,11 @@ import styled from 'styled-components';
 const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 5rem;
+  gap: 2rem;
   flex-grow: 1;
   border: 2px solid red;
+  justify-content: center;
+  align-items: center;
 `;
 const ProfileList = () => {
 

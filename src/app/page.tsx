@@ -24,7 +24,7 @@ export default function Home() {
   return (
     <HomeContainer>
       <MainContainer>
-        <Sidebar />
+        {/* <Sidebar /> */}
         <ProfileContainer>
           <SearchBar />
           <ProfileList />
