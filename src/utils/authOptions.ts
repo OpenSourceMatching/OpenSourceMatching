@@ -1,5 +1,5 @@
 import { NextAuthOptions } from "next-auth"
-import User from "@/models/User";
+import User from "@/models/user";
 import { connectToMongo } from "./mongoConnection";
 
 // Overview here:
@@ -39,7 +39,7 @@ export const authOptions: NextAuthOptions = {
       try {
         // connect to mongo
         await connectToMongo();
-        
+
         // Check if user is already in the database and create if not
         const user = await User.findOne({ email: profile.email });
         

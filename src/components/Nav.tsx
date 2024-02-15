@@ -4,11 +4,8 @@ import { useSession, signIn, signOut } from 'next-auth/react';
 import Image from 'next/image';
 
 const Nav = () => {
+  // useSession is a hook that returns an object with the session and status. It can only be used client side
   const { data: session, status } = useSession();
-
-  const handleLogOut = async () => {
-    await signOut({redirect: false, callbackUrl: '/'})
-  }
 
   console.log('status: ', status);
   console.log('session: ', session);
@@ -30,7 +27,7 @@ const Nav = () => {
             width={50}
             height={50}/>
         </div>
-        <button onClick={handleLogOut}>Sign Out</button>
+        <button onClick={() => signOut({redirect: false, callbackUrl: '/'})}>Sign Out</button>
       </>
       }
     </div>
