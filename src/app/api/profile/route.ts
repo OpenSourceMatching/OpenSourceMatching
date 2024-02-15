@@ -3,6 +3,7 @@ import User from "@/models/user";
 import { connectToMongo } from "@/utils/mongoConnection";
 import * as z from 'zod';
 
+
 // Validation of fields
 const updateProfileSchema = z.object({
   firstName: z.string().optional(),
