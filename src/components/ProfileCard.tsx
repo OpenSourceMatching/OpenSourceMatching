@@ -12,7 +12,11 @@ const ProfileCard = ({user}) => {
   return (
     <>
       <Card>
-        <img src="#" alt="profile image" />
+        <img 
+          src={"#" || 'default-image.jpg'} 
+          alt="profile image" 
+          style={{ width: '100%', height: 'auto', borderRadius: '4px', margin: '0 auto' }}
+        />
         <div>Name: {user.name}</div>
         <div>Email: {user.email}</div>
       </Card>
