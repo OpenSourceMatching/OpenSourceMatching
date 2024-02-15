@@ -27,11 +27,13 @@ const userSchema = new mongoose.Schema({
   lookingFor: { type: String}, // someone to work on my project, to work on someone else's project, both ??
 
   // messages
-  messages: [{
-    otherUser: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    type: [messageSchema],
+  messages: {
+    type: [{
+      otherUser: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+      conversation: [messageSchema],
+    }],
     default: [],
-  }],
+  },
 
 });
 
