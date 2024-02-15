@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import User from "@/models/user";
 import { connectToMongo } from "@/utils/mongoConnection";
 import * as z from 'zod';
-
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/utils/authOptions";
 
 // Validation of fields
 const updateProfileSchema = z.object({
@@ -22,8 +23,11 @@ const updateProfileSchema = z.object({
 // ** Handle GET requests to /api/profile ***
 
 // Need to send requests like this: http://localhost:3000/api/profile?userId=65ca8ba68909d19b19420b5c
-export const GET = async (req: NextRequest) => {
+export const GET = async (req: NextRequest, res: NextResponse) => {
   try {
+    const session = await getServerSession(authOptions);
+    console.log("session: ", session);
+
     const userId = req.nextUrl.searchParams.get('userId');
 
     if (!userId) {
