@@ -26,7 +26,7 @@ const updateProfileSchema = z.object({
 export const GET = async (req: NextRequest, res: NextResponse) => {
   try {
     const session = await getServerSession(authOptions);
-    // console.log("session from getServerSession: ", session);
+    console.log("session from getServerSession: ", session);
 
     const userId = req.nextUrl.searchParams.get('userId');
 
