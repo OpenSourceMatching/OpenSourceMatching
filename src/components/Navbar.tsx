@@ -10,9 +10,9 @@ const NavContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 30px; /* Increased padding for more horizontal space */
-  color: #ECF0F1; /* Light grey for text, ensuring good contrast against the dark background */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /
+  padding: 0 30px;
+  color: #ECF0F1; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 `;
 const NavItem = styled.span`
   margin: 0 10px
