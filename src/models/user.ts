@@ -10,28 +10,38 @@ const messageSchema = new mongoose.Schema({
 const userSchema = new mongoose.Schema({
   // login info
   email: { type: String, required: true },
-  password: { type: String}, // not sure descipe will even require a password
+  name: { type: String},
+  image: { type: String },
 
   // personal info
-  firstName: { type: String,},
-  lastName: { type: String},
   linkedIn: { type: String},
   github: { type: String},
   personalWebsite: { type: String},
   about: { type: String},
   location: { type: String},
   zip: {type: Number},
+  age: { type: Number},
+  employer: { type: String},
   
   // techincal info
   technologies: { type: [String]},
-  lookingFor: { type: String}, // someone to work on my project, to work on someone else's project, both ??
+  lookingFor: { type: String}, // someone to work on my project, to work on someone else's project, both
+  activeProjects: {
+    type: [{
+      title: {type: String},
+      description: {type: String},
+    }],
+    default: []
+  },
 
   // messages
-  messages: [{
-    otherUser: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    type: [messageSchema],
+  messages: {
+    type: [{
+      otherUser: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+      conversation: [messageSchema],
+    }],
     default: [],
-  }],
+  },
 
 });
 
