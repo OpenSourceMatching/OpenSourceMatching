@@ -9,7 +9,7 @@ const SidebarStyle = styled.aside`
   background-color: rgba(227, 227, 227, 0.391);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   flex-shrink: 0;
-  width: 200px; 
+  width: 225px; 
   padding: 20px; 
   display: flex;
   flex-direction: column;

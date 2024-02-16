@@ -15,14 +15,17 @@ const NavContainer = styled.header`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 `;
 const NavItem = styled.span`
-  margin: 0 10px
+  margin: 0 10px;
+  &:hover {
+    color: tomato
+  }
 `;
 const Navbar = () => {
 
   return (
     <>
       <NavContainer>
-        <Link href="./"><NavItem>Open Source Matcher</NavItem></Link>
+        <Link href="./"><NavItem>Open Source Match</NavItem></Link>
         <div>
           <Link href="./"><NavItem>Home</NavItem></Link>
           <Link href="./profile"><NavItem>Profile</NavItem></Link>
