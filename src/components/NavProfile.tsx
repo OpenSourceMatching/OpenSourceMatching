@@ -31,20 +31,27 @@ const NavProfile = () => {
     <>
       {/* Tells nextauth to use descope as the login provider and when finished, go back to home page when you aren't already authenticated */}
       {status !== 'authenticated' &&
-      <Button onClick={() => signIn("descope", { callbackUrl: "/" })}>Login/ Sign Up</Button>
+        <>
+          <Button onClick={() => signIn("descope", { callbackUrl: "/" })}>Login/Sign Up</Button>
+          <Image
+            src={'/profile-placeholder.svg'}
+            alt="profile picture"
+            width={40}
+            height={40}
+          />
+        </>
       }
       {/* Show profile picture if already signed in */}
       {status === 'authenticated' &&
       <>
-        <h3>{session.user?.name}</h3>
-        <div>
-          <Image
+        <h4>{session.user?.name}</h4>
+        <Button onClick={() => signOut({redirect: false, callbackUrl: '/'})}>Sign Out</Button>
+        <Image
             src={session.user?.image || '/profile-placeholder.svg'}
             alt="profile picture"
-            width={50}
-            height={50}/>
-        </div>
-        <Button onClick={() => signOut({redirect: false, callbackUrl: '/'})}>Sign Out</Button>
+            width={40}
+            height={40}
+        />
       </>
       }
     </>
