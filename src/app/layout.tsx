@@ -11,8 +11,8 @@ import NextAuthSessionProvider from "@components/NextAuthSessionProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Open Source Match",
-  description: "Find Devs for Your Open Source Product",
+  title: "Open Source Match | Find a dev to build the next great thing",
+  description: "Find like-minded developers to build the next great thing",
 };
 
 export default function RootLayout({
@@ -27,7 +27,7 @@ export default function RootLayout({
           <StyledComponentsRegistry>
             <Navbar />
               {children}
-            <Footer />
+            {/* <Footer /> */}
           </StyledComponentsRegistry>
         </NextAuthSessionProvider>
           {/* <Analytics/>

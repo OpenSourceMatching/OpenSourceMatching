@@ -3,6 +3,7 @@ import React from 'react'
 import { useSession, signIn, signOut } from 'next-auth/react';
 import Image from 'next/image';
 import styled from 'styled-components';
+import Link from 'next/link';
 
 const NavProfile = () => {
   const Button = styled.button`
@@ -38,20 +39,25 @@ const NavProfile = () => {
             alt="profile picture"
             width={40}
             height={40}
+            style={{borderRadius:'50%'}}
           />
         </>
       }
       {/* Show profile picture if already signed in */}
       {status === 'authenticated' &&
       <>
-        <h4>{session.user?.name}</h4>
         <Button onClick={() => signOut({redirect: false, callbackUrl: '/'})}>Sign Out</Button>
-        <Image
-            src={session.user?.image || '/profile-placeholder.svg'}
-            alt="profile picture"
-            width={40}
-            height={40}
-        />
+        <span style={{display:'flex', flexDirection:'column', alignItems:'center', marginLeft: '10px'}}>
+        {/* <span style={{border:'1px solid green', display:'flex', flexDirection:'column',alignItems:'center'}}> */}
+          <Link href={'/api/profile/route.ts'}><Image
+                src={session.user?.image || '/profile-placeholder.svg'}
+                alt="profile picture"
+                width={40}
+                height={40}
+                style={{borderRadius:'50%'}}
+            /></Link> 
+          <Link href={'/api/profile/route.ts'}>{session.user?.name}</Link> 
+        </span>
       </>
       }
     </>
