@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
   // Allow google images
   images: {
@@ -10,6 +11,9 @@ const nextConfig = {
       }
     ]
   },
+  compiler: {
+    styledComponents: true,
+  }
 };
 
 export default nextConfig;
