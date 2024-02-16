@@ -6,6 +6,8 @@ import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import NextAuthSessionProvider from "@components/NextAuthSessionProvider";
+import Nav from "@components/Nav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,13 +24,15 @@ export default function RootLayout({
   return (
     <html>
       <body>
-        <StyledComponentsRegistry>
-          <Navbar />
-            {children}
-          <Footer />
+        <NextAuthSessionProvider>
+          <StyledComponentsRegistry>
+            <Navbar />
+              {children}
+            <Footer />
+            </StyledComponentsRegistry>
+        </NextAuthSessionProvider>
           {/* <Analytics/>
           <SpeedInsights/> */}
-        </StyledComponentsRegistry>
       </body>
     </html>
   )
