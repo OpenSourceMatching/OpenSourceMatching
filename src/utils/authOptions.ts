@@ -30,8 +30,12 @@ export const authOptions: NextAuthOptions = {
     },
   ],
   callbacks: {
-    async signIn( {profile} ) {
+    async signIn( {user, account, profile, email, credentials} ) {
+      // console.log('user: ', user);
+      // console.log('account: ', account);
       // console.log('profile: ', profile);
+      // console.log('email: ', email);
+      // console.log('credentials: ', credentials);
       // **** Need to confirm exactly what other providers send - I think descope makes it all the same but need to test
       if (!profile?.email) {
         return false;

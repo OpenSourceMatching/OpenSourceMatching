@@ -20,10 +20,19 @@ const userSchema = new mongoose.Schema({
   about: { type: String},
   location: { type: String},
   zip: {type: Number},
+  age: { type: Number},
+  employer: { type: String},
   
   // techincal info
   technologies: { type: [String]},
-  lookingFor: { type: String}, // someone to work on my project, to work on someone else's project, both ??
+  lookingFor: { type: String}, // someone to work on my project, to work on someone else's project, both
+  activeProjects: {
+    type: [{
+      title: {type: String},
+      description: {type: String},
+    }],
+    default: []
+  },
 
   // messages
   messages: {
