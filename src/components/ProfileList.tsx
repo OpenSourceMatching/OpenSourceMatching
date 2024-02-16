@@ -9,10 +9,16 @@ const Container = styled.div`
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 2rem;
   flex-grow: 1;
-  border: 2px solid red;
   justify-content: center;
   align-items: center;
+  margin: 35px 0px;
+  // border: 2px solid red;
 `;
+
+const ContainerItem = styled.span`
+  
+`;
+
 const ProfileList = () => {
 
   type Users = {
@@ -30,7 +36,11 @@ const ProfileList = () => {
   },[])
 
  const userList = users.map(user => {
-  return <ProfileCard key={user.id} user={user}/>
+  return (
+    <span style={{alignItems: 'center', display:'flex', justifyContent:'center'}} key={user.id}>
+      <ProfileCard user={user}/>
+    </span>
+  )
  })
  
   return (

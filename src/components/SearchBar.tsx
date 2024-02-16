@@ -7,16 +7,17 @@ const SearchInput = styled.input`
   width: 100%;
   margin: 0 auto;
   max-width: 500px; 
-  padding: 10px 20px;
+  padding: 15px 20px;
   border: 1px solid #ccc; 
   border-radius: 8px; 
-  font-size: 14px;
+  font-size: 16px;
   color: #333; 
   outline: none; 
 `
 const SearchButton = styled.button`
-  padding: 8px 16px;
-  background-color: grey;
+  padding: 15px 20px;
+  margin: 0 10px;
+  background-color: tomato;
   color: #ffffff; 
   border: none; 
   border-radius: 5px; 
@@ -31,15 +32,15 @@ const SearchBar = () => {
  
   return (
     <>
-      <form style={{ textAlign: 'center' }}>
+      <form style={{ textAlign: 'center', margin: '30px 0px'}}>
         <label
-          htmlFor='search-input'
+          htmlFor={id + '-search'}
         >
         </label>
         <SearchInput
           type="search"
-          id='search-input'
-          placeholder='Joe Schmo'
+          id={id + '-search'}
+          placeholder='Search by Name'
           name='search'
         />
         <SearchButton>Search</SearchButton>

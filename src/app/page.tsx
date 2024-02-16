@@ -15,7 +15,6 @@ const HomeContainer = styled.div`
 const MainContainer = styled.main`
   display: flex;
   flex-grow: 1;
-  background-color: moccasin;
 `
 const ProfileContainer = styled.section`
   width: 100%
@@ -24,7 +23,7 @@ export default function Home() {
   return (
     <HomeContainer>
       <MainContainer>
-        {/* <Sidebar /> */}
+        <Sidebar />
         <ProfileContainer>
           <SearchBar />
           <ProfileList />
