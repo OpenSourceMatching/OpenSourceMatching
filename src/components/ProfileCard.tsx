@@ -29,7 +29,7 @@ const ProfileCard = ({user}) => {
       <Link href='./'>
         <Card>
            <Image
-            src={"" || "/default_image.png"}
+            src={"" || "profile-placeholder.svg"}
             height={125}
             width={125}
             alt="Profile Image"
