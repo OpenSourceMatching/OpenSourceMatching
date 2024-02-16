@@ -21,11 +21,15 @@ const SearchButton = styled.button`
   color: #ffffff; 
   border: none; 
   border-radius: 5px; 
-  cursor: pointer; /* Changes the cursor to a pointer to indicate it's clickable */
-  font-size: 16px; /* Readable font size */
-  font-weight: 500; /* Medium font weight for emphasis */
-  text-align: center; /* Ensures the text is centered */
-  display: inline-block; 
+  cursor: pointer; 
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center; 
+  display: inline-block;
+  &:hover{
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    background-color: maroon;
+  }
 `
 const SearchBar = () => {
   const id = useId();

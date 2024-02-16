@@ -3,6 +3,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Card = styled.div`
   background-color: #f9f9f9; 
@@ -14,6 +15,9 @@ const Card = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  &:hover{
+    background-color: rgba(227, 227, 227, 0.391);
+  }
 `;
 
 const CardItem = styled.div`
@@ -22,17 +26,19 @@ const CardItem = styled.div`
 const ProfileCard = ({user}) => {
   return (
     <>
-      <Card>
-         <Image
-          src={"" || "/default_image.png"}
-          height={125} 
-          width={125}
-          alt="Profile Image"
-          style={{borderRadius:'50%', margin:'10px'}}
-        />
-        <CardItem>{user.name}</CardItem>
-        <div>Email: {user.email}</div>
-      </Card>
+      <Link href='./'>
+        <Card>
+           <Image
+            src={"" || "/default_image.png"}
+            height={125}
+            width={125}
+            alt="Profile Image"
+            style={{borderRadius:'50%', margin:'10px'}}
+          />
+          <CardItem>{user.name}</CardItem>
+          <div>Email: {user.email}</div>
+        </Card>
+      </Link>
     </>
   )
 }

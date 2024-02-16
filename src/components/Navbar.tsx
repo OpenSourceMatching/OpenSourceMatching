@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import React from 'react'
 import styled from 'styled-components';
+import NavProfile from './NavProfile';
 
 const NavContainer = styled.header`
   background-color: #2C3E50;
@@ -30,6 +31,7 @@ const Navbar = () => {
           <Link href="./"><NavItem>Home</NavItem></Link>
           <Link href="./profile"><NavItem>Profile</NavItem></Link>
           <Link href="./messages"><NavItem>Messages</NavItem></Link>
+          <NavProfile />
         </div>
       </NavContainer>
     </>
