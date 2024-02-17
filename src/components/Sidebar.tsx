@@ -14,10 +14,11 @@ const SidebarStyle = styled.aside`
   display: flex;
   flex-direction: column;
   justify-content: start;
+  margin-left: 35px;
 `;
 const Sidebar = () => {
   return (
-    <SidebarStyle>Sidebar</SidebarStyle>
+    <SidebarStyle>Filters</SidebarStyle>
   )
 }
 

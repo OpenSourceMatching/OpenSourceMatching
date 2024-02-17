@@ -12,13 +12,12 @@ const NavContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 30px;
+  padding: 50px 30px;
   color: #ECF0F1; 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 `;
 const NavItem = styled.span`
   margin: 0 10px;
-  
   &:hover {
     color: tomato
   }
@@ -36,7 +35,7 @@ const Navbar = () => {
           height={60}
           style={{borderRadius: '50%'}}
         />
-        <NavItem>Open Source Match</NavItem>
+        <NavItem style={{fontSize:'25px', fontFamily:'monospace'}}>Open Source Match</NavItem>
       </Link>
         <div style={{display:'flex', alignItems:'center'}}>
         {/* <div style={{border: '1px solid red', display:'flex', alignItems:'center'}}> */}
