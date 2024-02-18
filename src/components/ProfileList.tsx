@@ -13,7 +13,7 @@ const Container = styled.div`
   // border: 2px solid red;
 `;
 
-const ProfileList = () => {
+const ProfileList = ({search}) => {
   type Users = {
     id: number;
     name: string;
@@ -28,13 +28,18 @@ const ProfileList = () => {
     fetch('/api/allProfiles')
     .then(res => res.json())
     .then(data => {
-      console.log(data)
       setUsers(data)
       setLoading(false);
     })
   },[])
 
- const userList = users.map(user => {
+  const filteredUsers = users.filter(user => {
+    const userName =  user.name ? user.name.toLowerCase() : '';
+    return userName.toLowerCase().includes(search.toLowerCase())
+  });
+
+  console.log('filtered', filteredUsers)
+ const userList = filteredUsers.map(user => {
   return (
     <span style={{alignItems: 'center', display:'flex', justifyContent:'center'}} key={user.email}>
       <ProfileCard user={user}/>

@@ -2,6 +2,7 @@
 
 import React, { useId, useState } from 'react'
 import styled from 'styled-components'
+import ProfileList from './ProfileList';
 
 const SearchInput = styled.input`
   width: 100%;
@@ -33,23 +34,34 @@ const SearchButton = styled.button`
 `
 const SearchBar = () => {
   const id = useId();
- 
+  const [search, setSearch] = useState('');
+  const [submittedSearch, setSubmittedSearch] = useState('');
+
+  function handleChange(event) {
+    // console.log('searched Value:',event.target.value)
+    setSearch(event.target.value)
+  }
+  function handleSubmit(event) {
+    event.preventDefault()
+    setSubmittedSearch(search);
+  }
+
   return (
     <>
-    {/* <div style={{margin:'30px 0px 0px 100px', fontSize:'25px', fontWeight:'bold'}}>Search and Message Developers:</div> */}
-      <form style={{margin: '30px 100px'}}>
+      <form style={{margin: '30px 100px'}} onSubmit={handleSubmit}>
         <label style={{fontSize:'25px', fontWeight:'bold'}} htmlFor={id + '-search'}>Search and Message Developers:</label>
-        <br></br>
-        <br></br>
+        <br /><br />
         <SearchInput
           type="search"
           id={id + '-search'}
           placeholder='Search by Name'
+          onChange={handleChange}
           name='search'
-          value='search'
+          value={search}
         />
-        <SearchButton>Search</SearchButton>
+        <SearchButton type='submit'>Search</SearchButton>
       </form>
+      <ProfileList search = {search}/>
     </>
   )
 }

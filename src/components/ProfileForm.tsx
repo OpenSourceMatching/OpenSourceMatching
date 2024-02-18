@@ -76,11 +76,11 @@ const id = useId();
 function handleChange(event) {
   const {name, value} = event.target
   setFormData(prevFormData => {
-        return {
-            ...prevFormData,
-            [name]: value
-        }
-    })
+    return {
+        ...prevFormData,
+        [name]: value
+    }
+  })
 }
 
 function handleSubmit(event) {

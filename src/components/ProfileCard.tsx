@@ -51,7 +51,7 @@ const ProfileCard = ({user}) => {
 
           <div style={{marginLeft:'10px'}}>
             <div style={{display:'flex', alignItems:'center', gap:'10px'}}>
-              <Link href='/user/'><h2>{user.name || 'User Name'}</h2></Link>
+              <Link href='/user/'><h2>{user.name || `${user.name = 'No Name'}`}</h2></Link>
               <div style={{color:'grey'}}>
                 <a href={'https://' + user.linkedIn}><FaLinkedin /> | </a>
                 <a href={user.github}><FaGithub /> | </a>
