@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 const SearchInput = styled.input`
   width: 100%;
-  margin: 0 16px;
+  // margin: 0 16px;
   max-width: 500px; 
   padding: 15px 20px;
   border: 1px solid #ccc; 
@@ -36,17 +36,17 @@ const SearchBar = () => {
  
   return (
     <>
-    <div style={{margin:'30px 0px 0px 100px', fontSize:'25px', fontWeight:'bold'}}>Search and Message Developers:</div>
-      <form style={{margin: '25px 85px'}}>
-        <label
-          htmlFor={id + '-search'}
-        >
-        </label>
+    {/* <div style={{margin:'30px 0px 0px 100px', fontSize:'25px', fontWeight:'bold'}}>Search and Message Developers:</div> */}
+      <form style={{margin: '30px 100px'}}>
+        <label style={{fontSize:'25px', fontWeight:'bold'}} htmlFor={id + '-search'}>Search and Message Developers:</label>
+        <br></br>
+        <br></br>
         <SearchInput
           type="search"
           id={id + '-search'}
           placeholder='Search by Name'
           name='search'
+          value='search'
         />
         <SearchButton>Search</SearchButton>
       </form>

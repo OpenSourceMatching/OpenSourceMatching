@@ -18,7 +18,7 @@ const SidebarStyle = styled.aside`
 `;
 const Sidebar = () => {
   return (
-    <SidebarStyle>Filters</SidebarStyle>
+    <SidebarStyle style={{}}><h2>Filters</h2></SidebarStyle>
   )
 }
 

@@ -4,13 +4,14 @@ import React from 'react'
 import styled from 'styled-components'
 import Image from 'next/image';
 import Link from 'next/link';
+import { FaLinkedin, FaGithub, FaEnvelope, FaGlobe } from 'react-icons/fa';
 
 const Card = styled.div`
   background-color: #f9f9f9; 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 15px;
+  padding: 35px 30px;
   width: 60rem;
   // display: flex;
   margin: 15px auto;
@@ -25,6 +26,7 @@ const Button = styled.button`
   border: none; 
   border-radius: 5px; 
   cursor: pointer;
+  font-size: 16px;
   font-weight: 500; 
   text-align: center;
   margin-left: auto;
@@ -38,7 +40,7 @@ const ProfileCard = ({user}) => {
     <>
       <Card>
 
-        <div style={{border: '1px solid red', display:'flex', alignItems:'center'}}>
+        <div style={{display:'flex', alignItems:'center'}}>
           <Image
               src={"" || "profile-placeholder.svg"}
               height={50}
@@ -47,13 +49,15 @@ const ProfileCard = ({user}) => {
               style={{borderRadius:'50%', margin:'10px'}}
             />
 
-          <div style={{border: '1px solid purple'}}>
-            <Link href='/user/'><h3>{user.name || 'User Name'}</h3></Link>
-            <div>
-              <a href={'https://' + user.linkedIn}>LinkedIn | </a>
-              <a href={user.github}>GitHub | </a>
-              <a href={'https://' + user.personalWebsite}>Website | </a>
-              <a href={'mailto: user.email'}>Email</a>
+          <div style={{marginLeft:'10px'}}>
+            <div style={{display:'flex', alignItems:'center', gap:'10px'}}>
+              <Link href='/user/'><h2>{user.name || 'User Name'}</h2></Link>
+              <div style={{color:'grey'}}>
+                <a href={'https://' + user.linkedIn}><FaLinkedin /> | </a>
+                <a href={user.github}><FaGithub /> | </a>
+                <a href={'https://' + user.personalWebsite}><FaGlobe /> | </a>
+                <a href={'mailto: user.email'}><FaEnvelope /></a>
+              </div>
             </div>
             <div>{user.activeProjects.length} Active Projects</div>
           </div>
@@ -62,11 +66,15 @@ const ProfileCard = ({user}) => {
           
         </div>
 
-        <div style={{border: '1px solid blue'}}>
+        <div style={{}}>
+            <br />
+          {/* <br /> */}
             <h4>About</h4>
             {user.about || 'I am a Full Stack Engineer.'}
+            <br />
+            <br />
             <h4>Tech</h4>
-            {user.technologies || 'Javascript, React, Node.js.'}
+            {user.technologies.length ? user.technologies : 'Javascript, React, Node.js.'}
         </div>
 
       </Card>
