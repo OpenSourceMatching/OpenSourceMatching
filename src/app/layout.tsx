@@ -27,6 +27,7 @@ export default function RootLayout({
         <NextAuthSessionProvider>
           <StyledComponentsRegistry>
             <Navbar />
+            <Nav/>
               {children}
             <Footer />
             </StyledComponentsRegistry>
