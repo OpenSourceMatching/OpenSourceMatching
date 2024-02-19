@@ -8,40 +8,40 @@ export async function getAllUserIds() {
   // connect to db
   await connectToMongo();
 
-  const userIds = 
+  // get array of user ids
+  const users= await User.find({}).exec();
 
-  // Returns an array that looks like this:
-  // [
-  //   {
-  //     params: {
-  //       id: 'ssg-ssr'
-  //     }
-  //   },
-  //   {
-  //     params: {
-  //       id: 'pre-rendering'
-  //     }
-  //   }
-  // ]
-  return fileNames.map((fileName) => {
+  // Log to test it
+  console.log('userIds: ', users.map((user) => {
     return {
       params: {
-        id: fileName.replace(/\.md$/, ''),
+        id: user._id.toString(),
+      },
+    };
+  }));
+
+  return users.map((user) => {
+    return {
+      params: {
+        id: user._id,
       },
     };
   });
 }
 
-export function getUserData(id) {
-  const fullPath = path.join(postsDirectory, `${id}.md`);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
+export async function getUserData(id: string) {
+  // connect to db
+  await connectToMongo();
 
-  // Use gray-matter to parse the post metadata section
-  const matterResult = matter(fileContents);
+  console.log('id: ', id);
+
+  // get user data
+  const user = await User.findById(id).exec();
+  
+  console.log('user: ', user);
+  // remove messages from user data
+  delete user.messages;
 
   // Combine the data with the id
-  return {
-    id,
-    ...matterResult.data,
-  };
+  return user;
 }
