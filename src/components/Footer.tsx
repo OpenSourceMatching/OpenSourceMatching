@@ -15,7 +15,7 @@ const FooterStyle = styled.div`
 `;
 const Footer = () => {
   return (
-    <FooterStyle>Footer</FooterStyle>
+    <FooterStyle></FooterStyle>
   )
 }
 

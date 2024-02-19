@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import React from 'react'
 import styled from 'styled-components';
+import NavProfile from './NavProfile';
+import Image from 'next/image';
 
 const NavContainer = styled.header`
   background-color: #2C3E50;
@@ -10,7 +12,7 @@ const NavContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 30px;
+  padding: 50px 30px;
   color: #ECF0F1; 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 `;
@@ -25,11 +27,21 @@ const Navbar = () => {
   return (
     <>
       <NavContainer>
-        <Link href="./"><NavItem>Open Source Match</NavItem></Link>
-        <div>
+      <Link href="./" style={{display:'flex', alignItems:'center'}}>
+        <Image
+          src={'/opensourcematch.png'}
+          alt="logo"
+          width={60}
+          height={60}
+          style={{borderRadius: '50%'}}
+        />
+        <NavItem style={{fontSize:'25px', fontFamily:'monospace'}}>Open Source Match</NavItem>
+      </Link>
+        <div style={{display:'flex', alignItems:'center'}}>
+        {/* <div style={{border: '1px solid red', display:'flex', alignItems:'center'}}> */}
           <Link href="./"><NavItem>Home</NavItem></Link>
-          <Link href="./profile"><NavItem>Profile</NavItem></Link>
           <Link href="./messages"><NavItem>Messages</NavItem></Link>
+          <NavProfile />
         </div>
       </NavContainer>
     </>

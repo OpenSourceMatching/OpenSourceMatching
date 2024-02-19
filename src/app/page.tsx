@@ -1,6 +1,6 @@
 'use client';
 
-import React from "react";
+import React, { useState } from "react";
 import styles from "./page.module.css";
 import Sidebar from "@components/Sidebar";
 import SearchBar from "@components/SearchBar";
@@ -20,13 +20,13 @@ const ProfileContainer = styled.section`
   width: 100%
 `
 export default function Home() {
+
   return (
     <HomeContainer>
       <MainContainer>
         <Sidebar />
         <ProfileContainer>
           <SearchBar />
-          <ProfileList />
         </ProfileContainer>
       </MainContainer>
     </HomeContainer>
