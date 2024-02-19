@@ -16,7 +16,7 @@ const updateProfileSchema = z.object({
   location: z.string().optional(),
   zip: z.number().optional(),
   technologies: z.array(z.string()).optional(),
-  lookingFor: z.enum(["someone to work on my project", "to work on someone else's project", "both"]).optional(), 
+  lookingFor: z.string().optional(),
 });
 
 
