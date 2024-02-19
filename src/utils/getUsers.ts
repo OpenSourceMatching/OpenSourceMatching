@@ -2,7 +2,9 @@ import User from '@models/user'
 import { connectToMongo } from './mongoConnection';
 
 // followed documentation here: https://nextjs.org/learn-pages-router/basics/dynamic-routes/implement-getstaticprops
+// then went to webdevsimplified
 
+// not sure if this is necessary - may be for deployment
 export async function getAllUserIds() {
 
   // connect to db
@@ -33,12 +35,12 @@ export async function getUserData(id: string) {
   // connect to db
   await connectToMongo();
 
-  console.log('id: ', id);
+  // console.log('id: ', id);
 
   // get user data
   const user = await User.findById(id).exec();
   
-  console.log('user: ', user);
+  // console.log('user: ', user);
   // remove messages from user data
   delete user.messages;
 

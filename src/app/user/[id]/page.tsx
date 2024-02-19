@@ -13,7 +13,7 @@ const UserPage = async ( { params }: {params: { id: string}}) => {
     return notFound();
   }
 
-  console.log('userData: ', userData);
+  // console.log('userData: ', userData);
 
   return (
     <div>
@@ -26,6 +26,8 @@ const UserPage = async ( { params }: {params: { id: string}}) => {
 }
 
 export default UserPage;
+
+// * Might still need these functions for prod?
 
 // export async function getStaticPaths() {
 //   // Return a list of possible value for id

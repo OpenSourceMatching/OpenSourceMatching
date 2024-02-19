@@ -25,6 +25,7 @@ const ProfileCard = ({user}) => {
   return (
     <>
       <Card>
+        {/* **John edits to test out. Hard-coded to go to one id but will need to be dynamic */}
         <Link
           href={`/user/65ce8cc7e2cb119e6308119e`}
         >
