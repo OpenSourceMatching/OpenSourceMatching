@@ -76,7 +76,7 @@ export const PATCH = async (req: NextRequest) => {
 
     // Validate data
     const validattedData = updateProfileSchema.parse(updateData);
-    console.log("validattedData: ", validattedData);
+    // console.log("validattedData: ", validattedData);
 
     await connectToMongo();
 
