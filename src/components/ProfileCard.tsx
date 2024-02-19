@@ -20,7 +20,7 @@ const Card = styled.div`
 const CardItem = styled.div`
   color: #2C3E50;
 `;
-const ProfileCard = ({user}) => {
+const ProfileCard = ({user}: any) => {
   // Link needs to be dynamic
   return (
     <>
