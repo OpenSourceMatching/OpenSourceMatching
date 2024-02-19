@@ -1,6 +1,15 @@
 import { NextAuthOptions } from "next-auth"
 import User from "@/models/user";
 import { connectToMongo } from "./mongoConnection";
+import type { DefaultUser } from 'next-auth';
+
+declare module 'next-auth' {
+  interface Session {
+    user?: DefaultUser & {
+      id: string;
+    };
+  }
+}
 
 // Overview here:
 // https://www.descope.com/blog/post/auth-nextjs13-app-nextauth
@@ -63,6 +72,11 @@ export const authOptions: NextAuthOptions = {
         return false;
       }
 
+    },
+
+    async session({ session, token, user }) {
+      // if we need mongoDB id, that logic would go here - not sure how to do it
+      return session
     }
   },
   secret: process.env.NEXTAUTH_SECRET,
