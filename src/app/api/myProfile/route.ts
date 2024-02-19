@@ -16,22 +16,20 @@ const updateProfileSchema = z.object({
   location: z.string().optional(),
   zip: z.number().optional(),
   technologies: z.array(z.string()).optional(),
-  lookingFor: z.enum(["someone to work on my project", "to work on someone else's project", "both"]).optional(), 
+  lookingFor: z.string().optional(),
 });
 
 
 // ** Handle GET requests to /api/profile ***
 
-// Need to send requests like this: http://localhost:3000/api/profile?userId=65ca8ba68909d19b19420b5c
+// Need to send requests like this: http://localhost:3000/api/myProfile
 export const GET = async (req: NextRequest, res: NextResponse) => {
   try {
-    const session = await getServerSession(authOptions);
-    // console.log("session from getServerSession: ", session);
+    const session = await getServerSession( authOptions);
+    // console.log("session: ", session);
 
-    const userId = req.nextUrl.searchParams.get('userId');
-
-    if (!userId) {
-      return NextResponse.json({ message: "User id not sent" }, {
+    if (!session?.user?.email) {
+      return NextResponse.json({ message: "User not logged in" }, {
         status: 404,
       });
     }
@@ -40,7 +38,7 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
     await connectToMongo();
 
     // find user by id
-    const userDetails: typeof User | null = await User.findById(userId);
+    const userDetails: typeof User | null = await User.findOne({ email: session.user.email });
 
     if (!userDetails) {
       return NextResponse.json({ message: "User not found" }, {
@@ -61,25 +59,28 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
 };
 
 // ** Handle PATCH requests to /api/profile ***
-// Send requests like: http://localhost:3000/api/profile?userId=65ca8ba68909d19b19420b5c
+// Send requests like: http://localhost:3000/api/myProfile
   // include all data in the body of the request
 export const PATCH = async (req: NextRequest) => {
   try {
-    const userId = req.nextUrl.searchParams.get('userId');
-    if (!userId) {
-      return NextResponse.json({ message: "User id not sent" }, {
+    const session = await getServerSession( authOptions);
+    // console.log("session: ", session);
+    
+    if (!session?.user?.email) {
+      return NextResponse.json({ message: "User not logged in" }, {
         status: 404,
       });
     }
+    
     const updateData = await req.json(); // Get update data from request body
-    // *** Need to validate the data before updating the user ***
 
+    // Validate data
     const validattedData = updateProfileSchema.parse(updateData);
-    console.log("validattedData: ", validattedData);
+    // console.log("validattedData: ", validattedData);
 
     await connectToMongo();
 
-    const updatedUser = await User.findByIdAndUpdate(userId, validattedData, {
+    const updatedUser = await User.findOneAndUpdate({email: session.user.email }, validattedData, {
       new: true, // Return the updated document
     });
 

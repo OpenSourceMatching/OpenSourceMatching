@@ -74,10 +74,10 @@ export const authOptions: NextAuthOptions = {
 
     },
 
-    async session({ session, token, user }) {
-      // if we need mongoDB id, that logic would go here - not sure how to do it
-      return session
-    }
+    // async session({ session, token, user }) {
+    //   // if we need mongoDB id, that logic would go here - not sure how to do it
+    //   return session
+    // }
   },
   secret: process.env.NEXTAUTH_SECRET,
 }

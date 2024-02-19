@@ -6,27 +6,15 @@ import { connectToMongo } from './mongoConnection';
 
 // not sure if this is necessary - may be for deployment
 export async function getAllUserIds() {
-
   // connect to db
   await connectToMongo();
 
   // get array of user ids
   const users= await User.find({}).exec();
 
-  // Log to test it
-  console.log('userIds: ', users.map((user) => {
-    return {
-      params: {
-        id: user._id.toString(),
-      },
-    };
-  }));
-
   return users.map((user) => {
     return {
-      params: {
-        id: user._id,
-      },
+        id: user._id.toString(),
     };
   });
 }
