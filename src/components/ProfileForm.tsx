@@ -87,11 +87,28 @@ function handleChange(event) {
   })
 }
 
-function handleSubmit(event) {
+async function handleSubmit(event) {
     event.preventDefault()
-    alert('Profile Updated!')
-    console.log(formData)
-    //Send Patch request with formData in body. Associate route with session.email?
+    const endpoint = `/api/profile?userId=${userId}`;
+    try {
+      const response = await fetch(endpoint, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+      if(!response.ok) {
+        throw new Error('Failed to patch profile')
+      }
+      const result = await response.json();
+      console.log('Profile Updated:', result)
+      alert('Profile Updated!')
+    }
+    catch(error) {
+      console.error('Error Updating Profile:')
+      alert('Error Updating Profile :(')
+    }
 }
 
 return (

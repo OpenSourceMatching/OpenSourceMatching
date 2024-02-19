@@ -40,7 +40,6 @@ const ProfileCard = ({user}) => {
   return (
     <>
       <Card>
-
         <div style={{display:'flex', alignItems:'center'}}>
           <Image
               src={"" || "profile-placeholder.svg"}
@@ -52,14 +51,15 @@ const ProfileCard = ({user}) => {
 
           <div style={{marginLeft:'10px'}}>
             <div style={{display:'flex', alignItems:'center', gap:'10px'}}>
-              <Link href='/user/'><h2>{user.name || `${user.name = 'No Name'}`}</h2></Link>
+              <Link href='/user/'><h2>{user.name || `${user.name = 'User Name'}`}</h2></Link>
               <div style={{color:'grey'}}>
                 <a href={'https://' + user.linkedIn}><FaLinkedin /> | </a>
-                <a href={user.github}><FaGithub /> | </a>
+                <a href={'https://' + user.github}><FaGithub /> | </a>
                 <a href={'https://' + user.personalWebsite}><FaGlobe /> | </a>
-                <a href={'mailto: user.email'}><FaEnvelope /></a>
+                <a href={`mailto: ${user.email}`}><FaEnvelope /></a>
               </div>
             </div>
+            <div>{user.location || 'San Francisco'}</div>
             <div>{user.activeProjects.length} Active Projects</div>
           </div>
           
@@ -69,13 +69,12 @@ const ProfileCard = ({user}) => {
 
         <div style={{}}>
             <br />
-          {/* <br /> */}
             <h4>About</h4>
             {user.about || 'I am a Full Stack Engineer.'}
             <br />
             <br />
             <h4>Tech</h4>
-            {user.technologies.length ? user.technologies : 'Javascript, React, Node.js.'}
+            {user.technologies.length ? user.technologies.toString() : 'Javascript, React, Node.js.'}
         </div>
 
       </Card>
