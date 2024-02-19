@@ -22,16 +22,14 @@ const updateProfileSchema = z.object({
 
 // ** Handle GET requests to /api/profile ***
 
-// Need to send requests like this: http://localhost:3000/api/profile?userId=65ca8ba68909d19b19420b5c
+// Need to send requests like this: http://localhost:3000/api/myProfile
 export const GET = async (req: NextRequest, res: NextResponse) => {
   try {
     const session = await getServerSession(authOptions);
-    // console.log("session from getServerSession: ", session);
+    console.log("session: ", session);
 
-    const userId = req.nextUrl.searchParams.get('userId');
-
-    if (!userId) {
-      return NextResponse.json({ message: "User id not sent" }, {
+    if (!session?.user?.email) {
+      return NextResponse.json({ message: "User not logged in" }, {
         status: 404,
       });
     }
@@ -40,7 +38,7 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
     await connectToMongo();
 
     // find user by id
-    const userDetails: typeof User | null = await User.findById(userId);
+    const userDetails: typeof User | null = await User.findOne({ email: session.user.email });
 
     if (!userDetails) {
       return NextResponse.json({ message: "User not found" }, {

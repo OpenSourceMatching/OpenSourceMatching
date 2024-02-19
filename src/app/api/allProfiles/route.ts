@@ -5,6 +5,7 @@ export const GET = async () => {
   try {
     await connectToMongo();
     const allUsers = await User.find({});
+    // may need to paginate this
     const allUsersWithoutSensitiveData = allUsers.map((user) => {
       return {
         name: user.name,
@@ -25,7 +26,7 @@ export const GET = async () => {
       };
     });
 
-    
+
     return new Response(JSON.stringify(allUsersWithoutSensitiveData), {
       status: 200,
     });
