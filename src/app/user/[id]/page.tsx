@@ -27,6 +27,7 @@ const UserPage = async ( { params }: {params: { id: string}}) => {
       <h1>User Page</h1>
       <div>{userData.name}</div>
       <div>{userData.email}</div>
+      <div>{userData.linkedIn}</div>
     </div>
   )
 }

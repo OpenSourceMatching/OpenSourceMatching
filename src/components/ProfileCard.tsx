@@ -37,6 +37,7 @@ const Button = styled.button`
 `
 const ProfileCard = ({user}) => {
   // Link needs to be dynamic
+  console.log('user: ', `user/${user._id}`);
   return (
     <>
       <Card>
@@ -51,7 +52,7 @@ const ProfileCard = ({user}) => {
 
           <div style={{marginLeft:'10px'}}>
             <div style={{display:'flex', alignItems:'center', gap:'10px'}}>
-              <Link href='/user/'><h2>{user.name || `${user.name = 'User Name'}`}</h2></Link>
+              <Link href={`user/${user._id}`}><h2>{user.name || `${user.name = 'User Name'}`}</h2></Link>
               <div style={{color:'grey'}}>
                 <a href={'https://' + user.linkedIn}><FaLinkedin /> | </a>
                 <a href={'https://' + user.github}><FaGithub /> | </a>

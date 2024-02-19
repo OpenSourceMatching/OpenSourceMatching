@@ -29,6 +29,7 @@ const ProfileList = ({search}) => {
     .then(res => res.json())
     .then(data => {
       setUsers(data)
+      console.log('user data: ', data);
       setLoading(false);
     })
   },[])
