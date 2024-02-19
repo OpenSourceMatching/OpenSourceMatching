@@ -36,6 +36,7 @@ const Button = styled.button`
   }
 `
 const ProfileCard = ({user}) => {
+  // Link needs to be dynamic
   return (
     <>
       <Card>
