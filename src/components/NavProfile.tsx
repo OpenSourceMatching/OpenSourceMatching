@@ -27,7 +27,7 @@ const NavProfile = () => {
   const { data: session, status } = useSession();
 
   // console.log('status: ', status);
-  // console.log('session: ', session);
+  console.log('session: ', session);
   return (
     <>
       {/* Tells nextauth to use descope as the login provider and when finished, go back to home page when you aren't already authenticated */}

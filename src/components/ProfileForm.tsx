@@ -1,6 +1,7 @@
 'use client'
 import React, {useState, useId} from 'react'
 import styled from 'styled-components';
+import { useSession} from 'next-auth/react';
 
 const FormStyle = styled.form`
   display: flex;
@@ -38,6 +39,9 @@ const TextAreaStyle = styled.textarea`
   border: 1px solid #ddd;
   border-radius: 5px;
   width: 100%;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  padding: 10px;
 `
 const SelectStyle = styled.select`
   width: 100%;
@@ -53,11 +57,11 @@ const OptionStyle = styled.option`
   padding: 10px;
 `
 const ProfileForm = () => {
+  const { data: session, status } = useSession();
   const [formData, setFormData] = useState(
     {
-        firstName: "", 
-        lastName: "", 
-        email: "",
+        name: session.user?.name || "", 
+        email: session.user?.email || "",
         linkedIn: "",
         github: "",
         personalWebsite: "",
@@ -85,27 +89,20 @@ function handleChange(event) {
 
 function handleSubmit(event) {
     event.preventDefault()
-    // submitToApi(formData)
+    alert('Profile Updated!')
     console.log(formData)
+    //Send Patch request with formData in body. Associate route with session.email?
 }
 
 return (
     <FormStyle onSubmit={handleSubmit}>
-      <LabelStyle htmlFor={id + "-firstName"}>First Name</LabelStyle>
+      <LabelStyle htmlFor={id + "-name"}>Name</LabelStyle>
       <InputStyle
           type="text"
           onChange={handleChange}
-          name="firstName"
-          value={formData.firstName}
-          id={id + '-firstName'}
-      />
-      <LabelStyle htmlFor={id + "-lastName"}>Last Name</LabelStyle>
-      <InputStyle
-          type="text"
-          onChange={handleChange}
-          name="lastName"
-          value={formData.lastName}
-          id={id + '-lastName'}
+          name="name"
+          value={formData.name}
+          id={id + '-name'}
       />
       <LabelStyle htmlFor={id + '-email'}>Email</LabelStyle>
       <InputStyle
@@ -205,7 +202,7 @@ return (
           value={formData.activeProjects}
           id={id + '-activeProjects'}
       />
-      <ButtonStyle>Submit</ButtonStyle>
+      <ButtonStyle type='submit'>Update</ButtonStyle>
     </FormStyle>
 )
 }
