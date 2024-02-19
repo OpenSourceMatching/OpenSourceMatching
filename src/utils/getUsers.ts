@@ -6,7 +6,7 @@ import { connectToMongo } from './mongoConnection';
 
 // not sure if this is necessary - may be for deployment
 export async function getAllUserIds() {
-
+  console.log('getAllUserIds');
   // connect to db
   await connectToMongo();
 
@@ -24,9 +24,7 @@ export async function getAllUserIds() {
 
   return users.map((user) => {
     return {
-      params: {
         id: user._id,
-      },
     };
   });
 }
