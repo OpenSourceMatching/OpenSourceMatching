@@ -1,7 +1,6 @@
 'use client'
 import React, {useState, useId} from 'react'
 import styled from 'styled-components';
-import { useSession} from 'next-auth/react';
 
 const FormStyle = styled.form`
   display: flex;
@@ -57,7 +56,6 @@ const OptionStyle = styled.option`
   padding: 10px;
 `
 const ProfileForm = () => {
-  const { data: session, status } = useSession();
   const [formData, setFormData] = useState(
     {
         linkedIn: "",
