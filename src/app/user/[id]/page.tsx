@@ -3,6 +3,7 @@ import User from '@models/user'
 import { getAllUserIds, getUserData } from '@utils/getUsers';
 import { notFound } from 'next/navigation';
 import exp from 'constants';
+import ProfileInfo from '@components/ProfileInfo';
 
 // Documentation: https://nextjs.org/learn-pages-router/basics/dynamic-routes/implement-getstaticpaths
 
@@ -23,13 +24,9 @@ const UserPage = async ( { params }: {params: { id: string}}) => {
   // Can use the useParams() hook to get the id from the URL in any child component
 
   return (
-    <div>
-      <h1>{userData.name}</h1>
-      <div>{userData.email}</div>
-      <div>{userData.linkedIn}</div>
-      <div>{userData.github}</div>
-      <div>{userData.about}</div>
-    </div>
+    <>
+      <ProfileInfo userData = {userData} />
+    </>
   )
 }
 

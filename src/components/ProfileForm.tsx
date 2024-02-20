@@ -197,7 +197,7 @@ return (
       </SelectStyle>
       <LabelStyle htmlFor={id + '-activeProjects'}>Active Projects</LabelStyle>
       <InputStyle
-          type="number"
+          type="text"
           onChange={handleChange}
           name="activeProjects"
           value={formData.activeProjects}
