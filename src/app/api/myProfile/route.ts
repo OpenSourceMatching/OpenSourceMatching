@@ -13,6 +13,7 @@ const updateProfileSchema = z.object({
   github: z.string().url().optional(),
   personalWebsite: z.string().url().optional(),
   about: z.string().optional(),
+  employer: z.string().optional(),
   location: z.string().optional(),
   zip: z.number().optional(),
   technologies: z.array(z.string()).optional(),
@@ -63,7 +64,7 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
   // include all data in the body of the request
 export const PATCH = async (req: NextRequest) => {
   try {
-    const session = await getServerSession( authOptions);
+    const session = await getServerSession(authOptions);
     // console.log("session: ", session);
     
     if (!session?.user?.email) {
@@ -80,9 +81,12 @@ export const PATCH = async (req: NextRequest) => {
 
     await connectToMongo();
 
-    const updatedUser = await User.findOneAndUpdate({email: session.user.email }, validattedData, {
-      new: true, // Return the updated document
-    });
+    const updatedUser = await User.findOneAndUpdate({email: session.user.email },
+      validattedData,
+      {
+        new: true, // Return the updated document
+      }
+    );
 
     if (!updatedUser) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });

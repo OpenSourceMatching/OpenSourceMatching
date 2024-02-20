@@ -37,7 +37,7 @@ const Button = styled.button`
 `
 const ProfileCard = ({user}) => {
   // Link needs to be dynamic
-  console.log('user: ', `user/${user._id}`);
+  // console.log('user: ', `user/${user._id}`);
   return (
     <>
       <Card>
