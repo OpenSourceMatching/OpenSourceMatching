@@ -30,8 +30,8 @@ export default function RootLayout({
             <Footer />
           </StyledComponentsRegistry>
         </NextAuthSessionProvider>
-          {/* <Analytics/>
-          <SpeedInsights/> */}
+          <Analytics/>
+          <SpeedInsights/>
       </body>
     </html>
   )
