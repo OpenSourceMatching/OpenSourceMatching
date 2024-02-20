@@ -29,7 +29,7 @@ const ProfileList = ({search}) => {
     .then(res => res.json())
     .then(data => {
       setUsers(data)
-      console.log('user data: ', data);
+      // console.log('user data: ', data);
       setLoading(false);
     })
   },[])
@@ -39,8 +39,8 @@ const ProfileList = ({search}) => {
     return userName.toLowerCase().includes(search.toLowerCase())
   });
 
-  console.log('filtered', filteredUsers)
- const userList = filteredUsers.map(user => {
+  // console.log('filtered', filteredUsers)
+  const userList = filteredUsers.map(user => {
   return (
     <span style={{alignItems: 'center', display:'flex', justifyContent:'center'}} key={user.email}>
       <ProfileCard user={user}/>

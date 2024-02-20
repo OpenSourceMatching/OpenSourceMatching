@@ -7,8 +7,6 @@ import { authOptions } from "@/utils/authOptions";
 
 // Validation of fields
 const updateProfileSchema = z.object({
-  firstName: z.string().optional(),
-  lastName: z.string().optional(),
   linkedIn: z.string().url().optional(), 
   github: z.string().url().optional(),
   personalWebsite: z.string().url().optional(),
