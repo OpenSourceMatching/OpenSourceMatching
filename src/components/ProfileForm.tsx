@@ -60,8 +60,6 @@ const ProfileForm = () => {
   const { data: session, status } = useSession();
   const [formData, setFormData] = useState(
     {
-        name: session.user?.name || "", 
-        email: session.user?.email || "",
         linkedIn: "",
         github: "",
         personalWebsite: "",
@@ -89,7 +87,7 @@ function handleChange(event) {
 
 async function handleSubmit(event) {
     event.preventDefault()
-    const endpoint = `/api/profile?userId=${userId}`;
+    const endpoint = `/api/myProfile`;
     try {
       const response = await fetch(endpoint, {
         method: 'PATCH',
@@ -112,23 +110,9 @@ async function handleSubmit(event) {
 }
 
 return (
+  <>
+    <h2>Update Your Profile</h2>
     <FormStyle onSubmit={handleSubmit}>
-      <LabelStyle htmlFor={id + "-name"}>Name</LabelStyle>
-      <InputStyle
-          type="text"
-          onChange={handleChange}
-          name="name"
-          value={formData.name}
-          id={id + '-name'}
-      />
-      <LabelStyle htmlFor={id + '-email'}>Email</LabelStyle>
-      <InputStyle
-          type="email"
-          onChange={handleChange}
-          name="email"
-          value={formData.email}
-          id={id + '-email'}
-      />
       <LabelStyle htmlFor={id + '-linkedIn'}>LinkedIn</LabelStyle>
       <InputStyle
           type="text"
@@ -221,6 +205,7 @@ return (
       />
       <ButtonStyle type='submit'>Update</ButtonStyle>
     </FormStyle>
+  </>
 )
 }
 

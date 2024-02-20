@@ -13,21 +13,22 @@ import exp from 'constants';
 const UserPage = async ( { params }: {params: { id: string}}) => {
   // state for if user is logged in
   const userData = await getUserData(params.id.toString());
-  
+
   if (!userData) {
     return notFound();
   }
 
-  // console.log('userData: ', userData);
+  console.log('userData: ', userData);
 
   // Can use the useParams() hook to get the id from the URL in any child component
 
   return (
     <div>
-      <h1>User Page</h1>
-      <div>{userData.name}</div>
+      <h1>{userData.name}</h1>
       <div>{userData.email}</div>
       <div>{userData.linkedIn}</div>
+      <div>{userData.github}</div>
+      <div>{userData.about}</div>
     </div>
   )
 }
