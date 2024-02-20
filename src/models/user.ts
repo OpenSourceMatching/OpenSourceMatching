@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
   personalWebsite: { type: String},
   about: { type: String},
   location: { type: String},
-  zip: {type: Number},
+  zip: {type: String},
   age: { type: Number},
   employer: { type: String},
   

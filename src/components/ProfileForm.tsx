@@ -68,7 +68,7 @@ const ProfileForm = () => {
         zip: "",
         age: "",
         employer: "",
-        technologies: "",
+        // technologies: [],
         lookingFor: "",
         activeProjects:""
     }
@@ -176,14 +176,14 @@ return (
           value={formData.employer}
           id={id + '-employer'}
       />
-      <LabelStyle htmlFor={id + '-technologies'}>Technologies</LabelStyle>
+      {/* <LabelStyle htmlFor={id + '-technologies'}>Technologies</LabelStyle>
       <InputStyle
           type="text"
           onChange={handleChange}
           name="technologies"
           value={formData.technologies}
           id={id + '-technologies'}
-      />
+      /> */}
       <LabelStyle htmlFor={id + '-lookingFor'}>What are you looking for?</LabelStyle>
       <SelectStyle 
           value={formData.lookingFor}
