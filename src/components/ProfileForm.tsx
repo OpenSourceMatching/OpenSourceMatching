@@ -75,7 +75,7 @@ const ProfileForm = () => {
 )
 const id = useId();
 
-function handleChange(event) {
+function handleChange(event: any) {
   const {name, value} = event.target
   setFormData(prevFormData => {
     return {
@@ -85,7 +85,7 @@ function handleChange(event) {
   })
 }
 
-async function handleSubmit(event) {
+async function handleSubmit(event: any) {
     event.preventDefault()
     const endpoint = `/api/myProfile`;
     try {
