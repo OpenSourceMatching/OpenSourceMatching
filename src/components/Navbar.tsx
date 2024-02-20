@@ -38,9 +38,8 @@ const Navbar = () => {
         <NavItem style={{fontSize:'25px', fontFamily:'monospace'}}>Open Source Match</NavItem>
       </Link>
         <div style={{display:'flex', alignItems:'center'}}>
-        {/* <div style={{border: '1px solid red', display:'flex', alignItems:'center'}}> */}
-          <Link href="./"><NavItem>Home</NavItem></Link>
-          <Link href="./messages"><NavItem>Messages</NavItem></Link>
+          <Link href="/"><NavItem>Home</NavItem></Link>
+          <Link href="/messages"><NavItem>Messages</NavItem></Link>
           <NavProfile />
         </div>
       </NavContainer>
