@@ -68,7 +68,7 @@ const ProfileForm = () => {
         zip: "",
         age: "",
         employer: "",
-        // technologies: [],
+        technologies: [],
         lookingFor: "",
         activeProjects:""
     }
