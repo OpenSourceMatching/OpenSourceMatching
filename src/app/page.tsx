@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from "react";
+import React, { useState, useEffect, use } from "react";
 import styles from "./page.module.css";
 import Sidebar from "@components/Sidebar";
 import SearchBar from "@components/SearchBar";
@@ -20,6 +20,24 @@ const ProfileContainer = styled.section`
   width: 100%
 `
 export default function Home() {
+
+  useEffect(() => {
+    // fetch data
+    const fetchData = async () => {
+      const response = await fetch('/api/myProfile', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ technologies: 'New Company' })
+      }
+      );
+      console.log('response: ', response);
+      const data = await response.json();
+      console.log('TEST DATA: ', data);
+    }
+    fetchData();
+  }, []);
 
   return (
     <HomeContainer>

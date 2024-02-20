@@ -1,8 +1,17 @@
 import { connectToMongo } from "@utils/mongoConnection";
+import { NextRequest, NextResponse } from "next/server";
 import User from "@/models/user";
 
-export const GET = async () => {
+// Potential Query Params
+// searchKeyword: string
+  // searches for technologies and active projects
+// lookingFor: string
+// distance: int - distance in miles (STRETCH)
+export const GET = async (req: NextRequest, res: NextResponse) => {
   try {
+    const searchKeyword = req.nextUrl.searchParams.get('searchKeyword');
+    const lookingFor = req.nextUrl.searchParams.get('lookingFor');
+
     await connectToMongo();
     const allUsers = await User.find({});
     // may need to paginate this
