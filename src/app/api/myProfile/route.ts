@@ -16,8 +16,13 @@ const updateProfileSchema = z.object({
   employer: stringOrEmpty,
   location: stringOrEmpty,
   zip: stringOrEmpty,
-  technologies: z.array(z.string()),
+  technologies: z.array(z.string().transform( val => val.toLowerCase())),
   lookingFor: stringOrEmpty,
+  age: stringOrEmpty,
+  activeProjects: z.array(z.object({
+    title: z.string(),
+    description: z.string(),
+  }).or(z.array(stringOrEmpty))),
 });
 
 

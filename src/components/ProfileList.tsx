@@ -13,7 +13,7 @@ const Container = styled.div`
   // border: 2px solid red;
 `;
 
-const ProfileList = ({search}) => {
+const ProfileList = ({search}: any) => {
   type Users = {
     id: number;
     name: string;

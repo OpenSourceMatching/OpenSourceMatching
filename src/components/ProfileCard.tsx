@@ -35,7 +35,7 @@ const Button = styled.button`
     background-color: green;
   }
 `
-const ProfileCard = ({user}) => {
+const ProfileCard = ({user}: any) => {
   return (
     <>
       <Card>

@@ -21,24 +21,6 @@ const ProfileContainer = styled.section`
 `
 export default function Home() {
 
-  // useEffect(() => {
-  //   // fetch data
-  //   const fetchData = async () => {
-  //     const response = await fetch('/api/myProfile', {
-  //       method: 'PATCH',
-  //       headers: {
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify({ technologies: 'New Company' })
-  //     }
-  //     );
-  //     console.log('response: ', response);
-  //     const data = await response.json();
-  //     console.log('TEST DATA: ', data);
-  //   }
-  //   fetchData();
-  // }, []);
-
   return (
     <HomeContainer>
       <MainContainer>
