@@ -3,42 +3,84 @@ import { NextRequest, NextResponse } from "next/server";
 import User from "@/models/user";
 
 // Potential Query Params
+// Page and limit for pagination
+
 // searchKeyword: string
   // searches for technologies and active projects
 // lookingFor: string
 // distance: int - distance in miles (STRETCH)
 export const GET = async (req: NextRequest, res: NextResponse) => {
   try {
-    const searchKeyword = req.nextUrl.searchParams.get('searchKeyword');
+    const searchKeyword = req.nextUrl.searchParams.get('searchkeyword');
     const lookingFor = req.nextUrl.searchParams.get('lookingFor');
+    const page = Number(req.nextUrl.searchParams.get('page')) || 1;
+
+    console.log('searchKeyword: ', searchKeyword);
+    console.log('lookingFor: ', lookingFor);
+    console.log('page: ', page);
 
     await connectToMongo();
-    const allUsers = await User.find({});
-    // may need to paginate this
-    const allUsersWithoutSensitiveData = allUsers.map((user) => {
-      return {
-        name: user.name,
-        email: user.email,
-        _id: user._id,
-        image: user.image,
-        linkedIn: user.linkedIn,
-        github: user.github,
-        personalWebsite: user.personalWebsite,
-        about: user.about,
-        location: user.location,
-        zip: user.zip,
-        age: user.age,
-        employer: user.employer,
-        technologies: user.technologies,
-        lookingFor: user.lookingFor,
-        activeProjects: user.activeProjects,
-      };
-    });
+    let allUsers;
+
+    // Note: I don't think skip and limit are particularly efficient for large datasets
+    if (!searchKeyword && !lookingFor) {
+      allUsers = await User
+        .find({})
+        .select('name email _id image linkedIn github personalWebsite about location zip age employer technologies lookingFor activeProjects')
+        .limit(20)
+        .skip((page - 1) * 20)
+        .exec();
+
+    } else if (searchKeyword && !lookingFor) {
+      allUsers = await User
+        .find({
+          $or: [
+            { technologies: { $in: [searchKeyword] } },
+            { lookingFor: { $in: [searchKeyword] } },
+            { 'activeProjects.title': { $in: [searchKeyword] } },
+            { 'activeProjects.description': { $in: [searchKeyword] } },
+          ],
+        })
+        .select('name email _id image linkedIn github personalWebsite about location zip age employer technologies lookingFor activeProjects')
+        .limit(20)
+        .skip((page - 1) * 20)
+        .exec();
+    } else if (!searchKeyword && lookingFor) {
+      allUsers = await User
+        .find({
+          lookingFor: lookingFor,
+        })
+        .select('name email _id image linkedIn github personalWebsite about location zip age employer technologies lookingFor activeProjects')
+        .limit(20)
+        .skip((page - 1) * 20)
+        .exec();
+    } else {
+      allUsers = await User
+        .find({
+          $and: [
+            {
+              lookingFor: lookingFor,
+            },
+            {
+              $or: [
+                { technologies: { $in: [searchKeyword] } },
+                { 'activeProjects.title': { $in: [searchKeyword] } },
+                { 'activeProjects.description': { $in: [searchKeyword] } },
+              ],
+            },
+          ],
+        })
+        .select('name email _id image linkedIn github personalWebsite about location zip age employer technologies lookingFor activeProjects')
+        .limit(20)
+        .skip((page - 1) * 20)
+        .exec();
+    }
 
 
-    return new Response(JSON.stringify(allUsersWithoutSensitiveData), {
+    return new Response(JSON.stringify(allUsers), {
       status: 200,
     });
+
   } catch (error) {
     console.error("Error in api/allProfiles GET: ", error);
     return new Response(JSON.stringify({'message' : 'Error finding user data'}), {

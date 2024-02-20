@@ -70,7 +70,7 @@ const ProfileForm = () => {
         employer: "",
         technologies: [],
         lookingFor: "",
-        activeProjects:""
+        activeProjects:[]
     }
 )
 const id = useId();
