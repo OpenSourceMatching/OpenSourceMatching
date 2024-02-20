@@ -5,16 +5,19 @@ import * as z from 'zod';
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/utils/authOptions";
 
+const stringOrEmpty = z.union([z.string(), z.literal("")]).optional();
+
 // Validation of fields
 const updateProfileSchema = z.object({
-  linkedIn: z.string().url().optional(), 
-  github: z.string().url().optional(),
-  personalWebsite: z.string().url().optional(),
-  about: z.string().optional(),
-  location: z.string().optional(),
-  zip: z.number().optional(),
-  technologies: z.array(z.string()).optional(),
-  lookingFor: z.string().optional(),
+  linkedIn: stringOrEmpty,
+  github: stringOrEmpty,
+  personalWebsite: stringOrEmpty,
+  about: stringOrEmpty,
+  employer: stringOrEmpty,
+  location: stringOrEmpty,
+  zip: stringOrEmpty,
+  technologies: z.array(z.string()),
+  lookingFor: stringOrEmpty,
 });
 
 
@@ -61,7 +64,8 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
   // include all data in the body of the request
 export const PATCH = async (req: NextRequest) => {
   try {
-    const session = await getServerSession( authOptions);
+    
+    const session = await getServerSession(authOptions);
     // console.log("session: ", session);
     
     if (!session?.user?.email) {
@@ -72,15 +76,20 @@ export const PATCH = async (req: NextRequest) => {
     
     const updateData = await req.json(); // Get update data from request body
 
+    console.log("updateData: ", updateData);
+
     // Validate data
     const validattedData = updateProfileSchema.parse(updateData);
     // console.log("validattedData: ", validattedData);
 
     await connectToMongo();
 
-    const updatedUser = await User.findOneAndUpdate({email: session.user.email }, validattedData, {
-      new: true, // Return the updated document
-    });
+    const updatedUser = await User.findOneAndUpdate({email: session.user.email },
+      validattedData,
+      {
+        new: true, // Return the updated document
+      }
+    );
 
     if (!updatedUser) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
