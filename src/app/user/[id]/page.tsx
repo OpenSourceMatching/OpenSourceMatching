@@ -16,12 +16,27 @@ const UserPage = async ( { params }: {params: { id: string}}) => {
     return notFound();
   }
 
-  console.log('userData: ', userData);
+  // console.log('userData: ', userData);
 
   // Can use the useParams() hook to get the id from the URL in any child component
 
   return (
-    <UserProfile userData={userData} />
+    <UserProfile
+    name={userData.name}
+    email={userData.email}
+    personalWebsite={userData.personalWebsite}
+    linkedIn={userData.linkedIn}
+    github={userData.github}
+    about={userData.about}
+    location={userData.location}
+    zip={userData.zip}
+    age= {userData.age}
+    employer={userData.employer}
+    technologies={userData.technologies}
+    lookingFor={userData.lookingFor}
+    activeProjects={userData.activeProjects}
+    image={userData.image}
+    />
   )
 }
 
