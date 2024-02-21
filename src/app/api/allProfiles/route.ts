@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import User from "@/models/user";
 
 // Potential Query Params
+// Ex: http://localhost:3000/api/allProfiles?page=1&searchkeyword=javascript&lookingFor=both
 // Page and limit for pagination
 
 // searchKeyword: string
@@ -15,9 +16,9 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
     const lookingFor = req.nextUrl.searchParams.get('lookingFor');
     const page = Number(req.nextUrl.searchParams.get('page')) || 1;
 
-    console.log('searchKeyword: ', searchKeyword);
-    console.log('lookingFor: ', lookingFor);
-    console.log('page: ', page);
+    // console.log('searchKeyword: ', searchKeyword);
+    // console.log('lookingFor: ', lookingFor);
+    // console.log('page: ', page);
 
     await connectToMongo();
     let allUsers;

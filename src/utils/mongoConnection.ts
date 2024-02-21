@@ -4,12 +4,12 @@ let isConnected: boolean = false;
 
 export const connectToMongo = async () => {
   if (isConnected) {
-    console.log('Using existing database connection');
+    // console.log('Using existing database connection');
     return;
   }
 
   try {
-    console.log('Using new database connection');
+    // console.log('Using new database connection');
     if (!process.env.MONGO_URI) {
       throw new Error('MONGOURI is not defined');
     }

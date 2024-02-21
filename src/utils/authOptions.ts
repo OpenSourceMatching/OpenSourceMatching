@@ -55,14 +55,16 @@ export const authOptions: NextAuthOptions = {
         await connectToMongo();
 
         // Check if user is already in the database and create if not
-        const user = await User.findOne({ email: profile.email });
+        const userInDB = await User.findOne({ email: profile.email });
         
-        if (!user) {
+        if (!userInDB) {
           await User.create({
             email: profile.email,
             name: profile.name,
-            image: profile.image,
+            image: profile.image || user.image,
           });
+        } else if (!userInDB.image) {
+          await User.findOneAndUpdate({ email: profile.email }, { image: profile.image || user.image});
         }
 
         return true;
