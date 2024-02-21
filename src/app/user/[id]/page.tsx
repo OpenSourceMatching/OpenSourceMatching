@@ -20,6 +20,11 @@ const UserPage = async ( { params }: {params: { id: string}}) => {
 
   // Can use the useParams() hook to get the id from the URL in any child component
 
+  const activeProjectsFormatted = userData.activeProjects.map( (project: any) =>{
+    return {title: project.title, description: project.description}
+  });
+  // console.log('activeProjectsFormatted: ', activeProjectsFormatted);
+
   return (
     <UserProfile
     name={userData.name}
@@ -34,7 +39,7 @@ const UserPage = async ( { params }: {params: { id: string}}) => {
     employer={userData.employer}
     technologies={userData.technologies}
     lookingFor={userData.lookingFor}
-    activeProjects={userData.activeProjects}
+    activeProjects={activeProjectsFormatted}
     image={userData.image}
     />
   )

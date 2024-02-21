@@ -9,7 +9,7 @@ const messageSchema = new mongoose.Schema({
 
 const userSchema = new mongoose.Schema({
   // login info
-  email: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
   name: { type: String},
   image: { type: String },
 
