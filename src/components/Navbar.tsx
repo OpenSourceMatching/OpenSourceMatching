@@ -27,7 +27,7 @@ const Navbar = () => {
   return (
     <>
       <NavContainer>
-      <Link href="./" style={{display:'flex', alignItems:'center'}}>
+      <Link href="/" style={{display:'flex', alignItems:'center'}}>
         <Image
           src={'/opensourcematch.png'}
           alt="logo"
