@@ -71,7 +71,7 @@ export const PATCH = async (req: NextRequest) => {
   try {
     
     const session = await getServerSession(authOptions);
-    // console.log("session: ", session);
+    console.log("session: ", session);
     
     if (!session?.user?.email) {
       return NextResponse.json({ message: "User not logged in" }, {
@@ -85,7 +85,7 @@ export const PATCH = async (req: NextRequest) => {
 
     // Validate data
     const validattedData = updateProfileSchema.parse(updateData);
-    // console.log("validattedData: ", validattedData);
+    console.log("validattedData: ", validattedData);
 
     await connectToMongo();
 
