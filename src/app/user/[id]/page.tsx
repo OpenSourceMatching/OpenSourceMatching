@@ -16,14 +16,14 @@ const UserPage = async ( { params }: {params: { id: string}}) => {
     return notFound();
   }
 
-  console.log('userData: ', userData);
+  // console.log('userData: ', userData);
 
   // Can use the useParams() hook to get the id from the URL in any child component
 
   const activeProjectsFormatted = userData.activeProjects.map( (project: any) =>{
     return {title: project.title, description: project.description}
   });
-  console.log('activeProjectsFormatted: ', activeProjectsFormatted);
+  // console.log('activeProjectsFormatted: ', activeProjectsFormatted);
 
   return (
     <UserProfile

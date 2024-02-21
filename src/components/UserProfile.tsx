@@ -156,7 +156,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
   activeProjects,
   image,
 }) => {
-  console.log("activeProjects: ", activeProjects);
+  // console.log("activeProjects: ", activeProjects);
   return (
     <MainStyle>
       <SectionStyle>
