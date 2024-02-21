@@ -2,6 +2,7 @@
 
 import React from "react";
 import styled from "styled-components";
+import { FaLinkedin, FaGithub, FaEnvelope, FaGlobe } from "react-icons/fa";
 
 const MainStyle = styled.main`
   display: flex;
@@ -26,7 +27,6 @@ const SectionStyle = styled.section`
 
 const StyledSectionLocation = styled(SectionStyle)`
   font-style: italic;
-  
 `;
 
 const TechnologyGroupStyle = styled.div`
@@ -78,29 +78,63 @@ const NameStyle = styled.h1`
   font-weight: bold;
 `;
 
-const AboutStyle = styled.p`
+const AboutStyle = styled.div`
   font-size: 18px;
   border-radius: 5px;
   padding: 15px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
+const AllProjectsStyle = styled.section`
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  stretch: 100%;
+`;
+
+const ProjectTitleStyle = styled.h3`
+  font-size: 24px;
+  font-weight: bold;
+  justify-self: center;
+  align-self: ;
+`;
+
+const ProjectContainerStyle = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Open Sans", sans-serif;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+`;
+const ProjectDescriptionContainer = styled.article`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
 `;
 
 type UserProfileProps = {
   name: string;
   email: string;
-  personalWebsite?: string ;
-  linkedIn?: string ;
-  github?: string ;
-  about?: string ;
-  location?: string ;
-  zip?: string ;
-  age?: string ;
-  employer?: string ;
+  personalWebsite?: string;
+  linkedIn?: string;
+  github?: string;
+  about?: string;
+  location?: string;
+  zip?: string;
+  age?: string;
+  employer?: string;
   technologies?: string[];
-  lookingFor?: string ;
-  image?: string ;
-  activeProjects: {
+  lookingFor?: string;
+  image?: string;
+  activeProjects?: {
     title: string;
     description: string;
   }[];
@@ -122,19 +156,31 @@ const UserProfile: React.FC<UserProfileProps> = ({
   activeProjects,
   image,
 }) => {
-
-  // console.log('image: ', image);
+  // console.log("activeProjects: ", activeProjects);
   return (
     <MainStyle>
       <SectionStyle>
         <NameStyle>{name}</NameStyle>
-        <div>
-          {image && <UserImage src={image} alt={name} />}
-        </div>
+        <div>{image && <UserImage src={image} alt={name} />}</div>
       </SectionStyle>
+      <div style={{ color: "grey" }}>
+        <a href={linkedIn} target="_blank">
+          <FaLinkedin /> |{" "}
+        </a>
+        <a href={github} target="_blank">
+          <FaGithub /> |{" "}
+        </a>
+        <a href={personalWebsite} target="_blank">
+          <FaGlobe /> |{" "}
+        </a>
+        <a href={`mailto: ${email}`} target="_blank">
+          <FaEnvelope />
+        </a>
+      </div>
       <SectionStyle>
         <Email>{email}</Email>
         <ExternalLink href={personalWebsite || ""} target="_blank">
+          <span style={{fontWeight: 'bold', color: 'black'}}>Website: </span>
           {personalWebsite}
         </ExternalLink>
       </SectionStyle>
@@ -146,29 +192,73 @@ const UserProfile: React.FC<UserProfileProps> = ({
           {github}
         </ExternalLink>
       </SectionStyle>
-      <StyledSectionLocation> 
+      <StyledSectionLocation>
         <div>{location}</div>
+        <div style={{fontStyle: 'normal'}}>|</div>
         <div>{zip}</div>
       </StyledSectionLocation>
-      <AboutStyle>{about}</AboutStyle>
-      <div>{age}</div>
-      <div>{employer}</div>
+      <StyledSectionLocation>
+        {age && (
+          <div>
+            <span style={{ fontWeight: "bold" }}>Age: </span>
+            {age}
+          </div>
+        )}
+        {employer && (
+          <div>
+            <span style={{ fontWeight: "bold" }}>Employer: </span>
+            {employer}
+          </div>
+        )}
+      </StyledSectionLocation>
+      <AboutStyle>
+        {about &&
+          about.split("\n").map((line, index) => {
+            return (
+              <p style={{ marginTop: "10px" }} key={index}>
+                {line}
+              </p>
+            );
+          })}
+      </AboutStyle>
+
       <TechnologyGroupStyle>
         {technologies &&
           technologies.map((tech: string, index: number) => {
             return <TechnologyStyle key={index}>{tech}</TechnologyStyle>;
           })}
       </TechnologyGroupStyle>
-      <div>{lookingFor}</div>
-      {activeProjects &&
-        activeProjects.map((project, index) => {
-          return (
-            <div key={index}>
-              <h3>{project.title}</h3>
-              <p>{project.description}</p>
+      <StyledSectionLocation>
+        {lookingFor && (
+          <>
+            <h3 style={{fontWeight: 'bold'}}>Looking for: </h3>
+            <div>
+              {`${
+                lookingFor === "both"
+                  ? "Looking for someone to work on my project and/or to work on someone else's project"
+                  : lookingFor
+              }`}
             </div>
-          );
-        })}
+          </>
+        )}
+      </StyledSectionLocation>
+      {activeProjects && <h2>Active Projects</h2>}
+      <AllProjectsStyle>
+        {activeProjects &&
+          activeProjects.map((project, index) => {
+            // console.log("project: ", project);
+            return (
+              <ProjectContainerStyle key={index}>
+                <ProjectTitleStyle>{project.title}</ProjectTitleStyle>
+                <ProjectDescriptionContainer>
+                  {project.description.split("\n").map((line, index) => {
+                    return <p key={index}>{line}</p>;
+                  })}
+                </ProjectDescriptionContainer>
+              </ProjectContainerStyle>
+            );
+          })}
+      </AllProjectsStyle>
     </MainStyle>
   );
 };
