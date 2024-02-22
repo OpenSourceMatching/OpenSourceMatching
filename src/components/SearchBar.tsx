@@ -37,11 +37,11 @@ const SearchBar = () => {
   const [search, setSearch] = useState('');
   const [submittedSearch, setSubmittedSearch] = useState('');
 
-  function handleChange(event) {
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     // console.log('searched Value:',event.target.value)
     setSearch(event.target.value)
   }
-  function handleSubmit(event) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setSubmittedSearch(search);
   }
