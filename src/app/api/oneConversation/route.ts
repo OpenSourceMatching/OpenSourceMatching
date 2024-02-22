@@ -26,7 +26,7 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
     const messages = await User.findOne({email: session.user.email }).select('messages').populate('messages.otherUser', 'name image').exec();
 
 
-    return new Response(JSON.stringify(allUsers), {
+    return new Response(JSON.stringify(messages), {
       status: 200,
     });
   } catch (error) {
