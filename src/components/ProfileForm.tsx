@@ -177,7 +177,7 @@ const ProfileForm = () => {
 
 return (
   <>
-    <h2>Update Your Profile</h2>
+    <h2 style={{textAlign:'center', marginTop:'20px', fontSize:'30px'}}>Update Your Profile</h2>
     <FormStyle onSubmit={handleSubmit}>
       <LabelStyle htmlFor={id + '-linkedIn'}>LinkedIn</LabelStyle>
       <InputStyle
@@ -259,7 +259,7 @@ return (
       >
           <OptionStyle value="">--Choose--</OptionStyle>
           <OptionStyle value="Someone to work on my project">Someone to work on my project</OptionStyle>
-          <OptionStyle value="To work on someone else's project">To work on someone else's project</OptionStyle>
+          <OptionStyle value="To work on someone else's project">To work on someone else&apos;s project</OptionStyle>
           <OptionStyle value="Both">Both</OptionStyle>
       </SelectStyle>
       <DivLabelStyle>
