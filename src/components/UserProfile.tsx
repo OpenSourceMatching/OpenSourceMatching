@@ -53,7 +53,7 @@ const TechnologyStyle = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   min-width: 100px;
   background-color: #2c3e50;
-  color: #FAF9F6;
+  color: #faf9f6;
 `;
 
 const ExternalLink = styled.a`
@@ -132,7 +132,7 @@ const SectionTitlesStyle = styled.h2`
   color: #2c3e50;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
   letter-spacing: 0.05em;
-  marginTop: 30px;
+  margintop: 30px;
 `;
 
 const GridContainer = styled.div`
@@ -152,7 +152,6 @@ const GridItem = styled.div`
   padding-x: 10px;
   border-radius: 5px;
 `;
-
 
 type UserProfileProps = {
   name: string;
@@ -201,7 +200,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
     setTimeout(() => {
       setCopied(false);
     }, 2000);
-  }
+  };
 
   return (
     <MainStyle>
@@ -215,15 +214,21 @@ const UserProfile: React.FC<UserProfileProps> = ({
       </SectionStyle>
       {/* Icons for links */}
       <div style={{ color: "grey" }}>
-        <a href={linkedIn} target="_blank">
-          <FaLinkedin /> |{" "}
-        </a>
-        <a href={github} target="_blank">
-          <FaGithub /> |{" "}
-        </a>
-        <a href={personalWebsite} target="_blank">
-          <FaGlobe /> |{" "}
-        </a>
+        {linkedIn && (
+          <a href={linkedIn} target="_blank">
+            <FaLinkedin /> |{" "}
+          </a>
+        )}
+        {github &&
+          <a href={github} target="_blank">
+            <FaGithub /> |{" "}
+          </a>
+        }
+        {personalWebsite &&
+          <a href={personalWebsite} target="_blank">
+            <FaGlobe /> |{" "}
+          </a>
+        }
         <a href={`mailto: ${email}`} target="_blank">
           <FaEnvelope />
         </a>
@@ -242,7 +247,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
         <GridItem>
           <div style={{ fontWeight: "bold", color: "#001a00" }}>Email:</div>
           <div>
-            <ExternalLink style={{paddingRight: '8px'}}>{email}</ExternalLink>
+            <ExternalLink style={{ paddingRight: "8px" }}>{email}</ExternalLink>
             {!copied && <FaCopy onClick={handleCopy} />}
             {copied && <FaCheck />}
           </div>
@@ -259,9 +264,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
 
         {/* LinkedIn */}
         <GridItem>
-        <div style={{ fontWeight: "bold", color: "#001a00" }}>
-            LinkedIn:
-          </div>
+          <div style={{ fontWeight: "bold", color: "#001a00" }}>LinkedIn:</div>
           <ExternalLink href={linkedIn || ""} target="_blank">
             {linkedIn}
           </ExternalLink>
@@ -269,9 +272,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
 
         {/* GitHub */}
         <GridItem>
-        <div style={{ fontWeight: "bold", color: "#001a00" }}>
-            Github:
-          </div>
+          <div style={{ fontWeight: "bold", color: "#001a00" }}>Github:</div>
           <ExternalLink href={github || ""} target="_blank">
             {github}
           </ExternalLink>
@@ -302,8 +303,8 @@ const UserProfile: React.FC<UserProfileProps> = ({
             <div>
               {`${
                 lookingFor === "Both"
-                ? "Looking for someone to work on my project and/or to work on someone else's project"
-                : lookingFor
+                  ? "Looking for someone to work on my project and/or to work on someone else's project"
+                  : lookingFor
               }`}
             </div>
           </>
