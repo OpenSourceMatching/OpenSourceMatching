@@ -33,11 +33,11 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
         .exec();
 
     } else if (searchKeyword && !lookingFor) {
+      // console.log('searchKeyword: ', searchKeyword);
       allUsers = await User
         .find({
           $or: [
             { technologies: { $in: [searchKeyword] } },
-            { lookingFor: { $in: [searchKeyword] } },
             { 'activeProjects.title': { $in: [searchKeyword] } },
             { 'activeProjects.description': { $in: [searchKeyword] } },
           ],
@@ -77,7 +77,7 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
         .exec();
     }
 
-
+    // console.log('allUsers: ', allUsers);
     return new Response(JSON.stringify(allUsers), {
       status: 200,
     });

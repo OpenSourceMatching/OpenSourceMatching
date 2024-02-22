@@ -3,7 +3,7 @@ import React from 'react'
 
 const MessageWindow = () => {
   return (
-    <div>MessageWindow</div>
+    <div style={{fontStyle:'italic'}}>Coming Soon</div>
   )
 }
 
