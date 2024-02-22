@@ -59,7 +59,7 @@ const SearchBar:React.FC<SearchBarProps> = ({setSubmittedSearch, setSearch, sear
         <SearchInput
           type="search"
           id={id + '-search'}
-          placeholder='Search by Name'
+          placeholder='Search'
           onChange={handleChange}
           name='search'
           value={search}
