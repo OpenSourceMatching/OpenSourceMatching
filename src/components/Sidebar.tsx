@@ -58,7 +58,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setLookingFor, lookingFor, handleChan
       >
           <OptionStyle value="">--Choose--</OptionStyle>
           <OptionStyle value="Someone to work on my project">Someone to work on my project</OptionStyle>
-          <OptionStyle value="To work on someone else's project">To work on someone else's project</OptionStyle>
+          <OptionStyle value="To work on someone else's project">To work on someone else&apos;s project</OptionStyle>
           <OptionStyle value="Both">Both</OptionStyle>
       </SelectStyle>
     </SidebarStyle>
