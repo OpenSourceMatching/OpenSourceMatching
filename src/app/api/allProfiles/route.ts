@@ -38,7 +38,6 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
         .find({
           $or: [
             { technologies: { $in: [searchKeyword] } },
-            { lookingFor: { $in: [searchKeyword] } },
             { 'activeProjects.title': { $in: [searchKeyword] } },
             { 'activeProjects.description': { $in: [searchKeyword] } },
           ],
@@ -78,7 +77,7 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
         .exec();
     }
 
-    console.log('allUsers: ', allUsers);
+    // console.log('allUsers: ', allUsers);
     return new Response(JSON.stringify(allUsers), {
       status: 200,
     });

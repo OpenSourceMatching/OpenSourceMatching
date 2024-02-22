@@ -32,10 +32,15 @@ const SearchButton = styled.button`
     background-color: maroon;
   }
 `
-const SearchBar = () => {
+type SearchBarProps = {
+  setSubmittedSearch: (search: string) => void;
+  setSearch: (search: string) => void;
+  search: string;
+  lookingFor: string;
+}
+
+const SearchBar:React.FC<SearchBarProps> = ({setSubmittedSearch, setSearch, search, lookingFor}) => {
   const id = useId();
-  const [search, setSearch] = useState('');
-  const [submittedSearch, setSubmittedSearch] = useState('');
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     // console.log('searched Value:',event.target.value)
@@ -61,7 +66,10 @@ const SearchBar = () => {
         />
         <SearchButton type='submit'>Search</SearchButton>
       </form>
-      <ProfileList search = {search}/>
+      <ProfileList
+        search = {search}
+        lookingFor={lookingFor}
+      />
     </>
   )
 }

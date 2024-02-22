@@ -14,7 +14,12 @@ const Container = styled.div`
   // border: 2px solid red;
 `;
 
-const ProfileList = ({search}: any) => {
+type ProfileListProps = {
+  search: string;
+  lookingFor: string;
+}
+
+const ProfileList:React.FC<ProfileListProps> = ({search, lookingFor}) => {
   type Users = {
     id: number;
     name: string;
@@ -26,8 +31,11 @@ const ProfileList = ({search}: any) => {
   const [loading, setLoading] = useState(true);
 
   const fetchUsers = (search: string) => {
-    fetch(`${search ? 
-      `/api/allProfiles?searchkeyword=${search}`
+    console.log('search: ', search);
+    console.log('lookingFor: ', lookingFor);
+
+    fetch(`${search || lookingFor ? 
+      `/api/allProfiles?searchkeyword=${search}&lookingFor=${lookingFor}`
       : '/api/allProfiles'}`)
     .then(res => res.json())
     .then(data => {
@@ -42,7 +50,7 @@ const ProfileList = ({search}: any) => {
     // console.log('search: ', search);
     // console.log('fetching users: ', `/api/allProfiles?searchkeyword=${search}`);
     fetchUsers(search);
-  },[search])
+  },[search, lookingFor])
 
   // const filteredUsers = users.filter(user => {
   //   const userName =  user.name ? user.name.toLowerCase() : '';
