@@ -1,8 +1,15 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { FaLinkedin, FaGithub, FaEnvelope, FaGlobe } from "react-icons/fa";
+import {
+  FaLinkedin,
+  FaGithub,
+  FaEnvelope,
+  FaGlobe,
+  FaCopy,
+  FaCheck,
+} from "react-icons/fa";
 
 const MainStyle = styled.main`
   display: flex;
@@ -44,9 +51,9 @@ const TechnologyStyle = styled.div`
   padding: 10px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  bg-color: grey;
-  hover: bg-color: tomato;
-  min-width: 100px
+  min-width: 100px;
+  background-color: #2c3e50;
+  color: #FAF9F6;
 `;
 
 const ExternalLink = styled.a`
@@ -55,14 +62,7 @@ const ExternalLink = styled.a`
   font-weight: bold;
   &:hover {
     text-decoration: underline;
-  }
-`;
-const Email = styled.a`
-  color: blue;
-  text-decoration: none;
-  font-weight: bold;
-  &:hover {
-    text-decoration: underline;
+    cursor: pointer;
   }
 `;
 
@@ -100,7 +100,10 @@ const ProjectTitleStyle = styled.h3`
   font-size: 24px;
   font-weight: bold;
   justify-self: center;
-  align-self: ;
+  align-self: center;
+  color: #2c3e50;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.05em;
 `;
 
 const ProjectContainerStyle = styled.section`
@@ -108,6 +111,7 @@ const ProjectContainerStyle = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 20px;
   font-family: "Open Sans", sans-serif;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
@@ -119,6 +123,36 @@ const ProjectDescriptionContainer = styled.article`
   gap: 10px;
   padding: 10px;
 `;
+
+const SectionTitlesStyle = styled.h2`
+  font-size: 36px;
+  font-weight: bold;
+  justify-self: center;
+  align-self: center;
+  color: #2c3e50;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.05em;
+  marginTop: 30px;
+`;
+
+const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 400px);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 20px;
+  margin: auto;
+`;
+
+const GridItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding-y: 20px;
+  padding-x: 10px;
+  border-radius: 5px;
+`;
+
 
 type UserProfileProps = {
   name: string;
@@ -156,13 +190,30 @@ const UserProfile: React.FC<UserProfileProps> = ({
   activeProjects,
   image,
 }) => {
-  // console.log("activeProjects: ", activeProjects);
+  // console.log("image: ", image);
+
+  // state if copied
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(email);
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
+  }
+
   return (
     <MainStyle>
       <SectionStyle>
         <NameStyle>{name}</NameStyle>
-        <div>{image && <UserImage src={image} alt={name} />}</div>
+        <div>
+          {image && (
+            <UserImage src={image || "profile-placeholder.svg"} alt={name} />
+          )}
+        </div>
       </SectionStyle>
+      {/* Icons for links */}
       <div style={{ color: "grey" }}>
         <a href={linkedIn} target="_blank">
           <FaLinkedin /> |{" "}
@@ -177,26 +228,57 @@ const UserProfile: React.FC<UserProfileProps> = ({
           <FaEnvelope />
         </a>
       </div>
-      <SectionStyle>
-        <Email>{email}</Email>
-        <ExternalLink href={personalWebsite || ""} target="_blank">
-          <span style={{fontWeight: 'bold', color: 'black'}}>Website: </span>
-          {personalWebsite}
-        </ExternalLink>
-      </SectionStyle>
-      <SectionStyle>
-        <ExternalLink href={linkedIn || ""} target="_blank">
-          {linkedIn}
-        </ExternalLink>
-        <ExternalLink href={github || ""} target="_blank">
-          {github}
-        </ExternalLink>
-      </SectionStyle>
+
+      {/* Location */}
       <StyledSectionLocation>
         <div>{location}</div>
-        <div style={{fontStyle: 'normal'}}>|</div>
+        {location && zip && <div style={{ fontStyle: "normal" }}>|</div>}
         <div>{zip}</div>
       </StyledSectionLocation>
+
+      {/* Email, website, github, and linkedin */}
+      <GridContainer>
+        {/* Email */}
+        <GridItem>
+          <div style={{ fontWeight: "bold", color: "#001a00" }}>Email:</div>
+          <div>
+            <ExternalLink style={{paddingRight: '8px'}}>{email}</ExternalLink>
+            {!copied && <FaCopy onClick={handleCopy} />}
+            {copied && <FaCheck />}
+          </div>
+        </GridItem>
+        {/* Personal Website */}
+        <GridItem>
+          <div style={{ fontWeight: "bold", color: "#001a00" }}>
+            Personal Website:
+          </div>
+          <ExternalLink href={personalWebsite || ""} target="_blank">
+            {personalWebsite}
+          </ExternalLink>
+        </GridItem>
+
+        {/* LinkedIn */}
+        <GridItem>
+        <div style={{ fontWeight: "bold", color: "#001a00" }}>
+            LinkedIn:
+          </div>
+          <ExternalLink href={linkedIn || ""} target="_blank">
+            {linkedIn}
+          </ExternalLink>
+        </GridItem>
+
+        {/* GitHub */}
+        <GridItem>
+        <div style={{ fontWeight: "bold", color: "#001a00" }}>
+            Github:
+          </div>
+          <ExternalLink href={github || ""} target="_blank">
+            {github}
+          </ExternalLink>
+        </GridItem>
+      </GridContainer>
+
+      {/* Age and Employer */}
       <StyledSectionLocation>
         {age && (
           <div>
@@ -211,6 +293,25 @@ const UserProfile: React.FC<UserProfileProps> = ({
           </div>
         )}
       </StyledSectionLocation>
+
+      {/* Looking For  */}
+      <StyledSectionLocation>
+        {lookingFor && (
+          <>
+            <h3 style={{ fontWeight: "bold" }}>Looking for: </h3>
+            <div>
+              {`${
+                lookingFor === "Both"
+                ? "Looking for someone to work on my project and/or to work on someone else's project"
+                : lookingFor
+              }`}
+            </div>
+          </>
+        )}
+      </StyledSectionLocation>
+
+      {/* About */}
+      <SectionTitlesStyle>About</SectionTitlesStyle>
       <AboutStyle>
         {about &&
           about.split("\n").map((line, index) => {
@@ -221,28 +322,15 @@ const UserProfile: React.FC<UserProfileProps> = ({
             );
           })}
       </AboutStyle>
-
+      <SectionTitlesStyle>Technologies</SectionTitlesStyle>
       <TechnologyGroupStyle>
         {technologies &&
           technologies.map((tech: string, index: number) => {
             return <TechnologyStyle key={index}>{tech}</TechnologyStyle>;
           })}
       </TechnologyGroupStyle>
-      <StyledSectionLocation>
-        {lookingFor && (
-          <>
-            <h3 style={{fontWeight: 'bold'}}>Looking for: </h3>
-            <div>
-              {`${
-                lookingFor === "both"
-                  ? "Looking for someone to work on my project and/or to work on someone else's project"
-                  : lookingFor
-              }`}
-            </div>
-          </>
-        )}
-      </StyledSectionLocation>
-      {activeProjects && <h2>Active Projects</h2>}
+
+      <SectionTitlesStyle>Active Projects</SectionTitlesStyle>
       <AllProjectsStyle>
         {activeProjects &&
           activeProjects.map((project, index) => {
@@ -258,6 +346,7 @@ const UserProfile: React.FC<UserProfileProps> = ({
               </ProjectContainerStyle>
             );
           })}
+        {!activeProjects && <div>No active projects</div>}
       </AllProjectsStyle>
     </MainStyle>
   );
