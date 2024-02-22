@@ -177,7 +177,7 @@ const ProfileForm = () => {
 
 return (
   <>
-    <h2>Update Your Profile</h2>
+    <h2 style={{textAlign:'center', marginTop:'20px', fontSize:'30px'}}>Update Your Profile</h2>
     <FormStyle onSubmit={handleSubmit}>
       <LabelStyle htmlFor={id + '-linkedIn'}>LinkedIn</LabelStyle>
       <InputStyle

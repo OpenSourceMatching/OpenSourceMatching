@@ -41,7 +41,7 @@ const ProfileCard = ({user}: any) => {
       <Card>
         <div style={{display:'flex', alignItems:'center'}}>
           <Image
-              src={"" || "profile-placeholder.svg"}
+              src={user.image || "profile-placeholder.svg"}
               height={50}
               width={50}
               alt="Profile Image"
