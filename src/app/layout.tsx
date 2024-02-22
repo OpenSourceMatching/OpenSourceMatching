@@ -10,8 +10,8 @@ import NextAuthSessionProvider from "@components/NextAuthSessionProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "OpenForge | Find a dev to build the next great thing",
-  description: "Find like-minded developers to build the next great thing",
+  title: "OpenForge | Find devs and build the next great thing",
+  description: "A portal to find like-minded developers to build the next great thing",
 };
 
 export default function RootLayout({
