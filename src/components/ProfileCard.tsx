@@ -52,9 +52,9 @@ const ProfileCard = ({user}: any) => {
             <div style={{display:'flex', alignItems:'center', gap:'10px'}}>
               <Link href={`user/${user._id}`}><h2>{user.name}</h2></Link>
               <div style={{color:'grey'}}>
-                <a href={'https://' + user.linkedIn} target="_blank"><FaLinkedin /> | </a>
-                <a href={'https://' + user.github} target="_blank"><FaGithub /> | </a>
-                <a href={'https://' + user.personalWebsite} target="_blank"><FaGlobe /> | </a>
+                <a href={user.linkedIn.slice(0,7) === 'https://' ? user.linkedIn : 'https://' + user.linkedIn} target="_blank"><FaLinkedin /> | </a>
+                <a href={user.github.slice(0,7) === 'https://' ? user.github :  'https://' + user.github} target="_blank"><FaGithub /> | </a>
+                <a href={user.personalWebsite.slice(0,7) === 'https://' ? user.personalWebsite :  'https://' + user.personalWebsite} target="_blank"><FaGlobe /> | </a>
                 <a href={`mailto: ${user.email}`} target="_blank"><FaEnvelope /></a>
               </div>
             </div>
