@@ -4,9 +4,10 @@ import React from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
 import Link from 'next/link';
+import { string } from '../../node_modules/joi/lib/index';
 
 const MessageCard = styled.div`
-  background-color: #f9f9f9; 
+  background-color: #f9f9f9;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -14,44 +15,71 @@ const MessageCard = styled.div`
   width: 60rem;
   display: flex;
   margin: 15px auto;
-  &:hover{
+  &:hover {
     background-color: rgba(227, 227, 227, 0.391);
   }
 `;
 
-const MessageChatCard = ({user}: any) => {
+const MessageOpened = styled.div`
+  color: ${(props) => (props.$isUserSender ? 'gray' : '#173fac')};
+  display: flex;
+  border: ${(props) => {
+    console.log(props, 'props');
+  }};
+`;
+
+const S = {
+  MessageCard: MessageCard,
+  MessageOpened: MessageOpened,
+};
+
+const MessageChatCard = ({ user }: any) => {
+  console.log(user.name, user.isUserSender);
   return (
     <>
-      <MessageCard>
-        <div style={{display:'flex', alignItems:'center'}}>
+      <S.MessageCard>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
           <Image
-              src={user.image || "profile-placeholder.svg"}
-              height={100}
-              width={100}
-              alt="Profile Image"
-              style={{borderRadius:'50%', margin:'10px'}}
-            />
+            src={user.image || 'profile-placeholder.svg'}
+            height={100}
+            width={100}
+            alt='Profile Image'
+            style={{ borderRadius: '50%', margin: '10px' }}
+          />
         </div>
-        <div style={{display:'flex', flexDirection:'column', marginLeft:'25px', justifyContent:'space-around'}}>
-          <div style={{display:'flex'}}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            marginLeft: '25px',
+            justifyContent: 'space-around',
+          }}
+        >
+          <div style={{ display: 'flex' }}>
             <div>
-              <div style={{display:'flex', alignItems:'center', gap:'10px'}}>
-                <Link href={`user/${user._id}`}><h2>{user.name}</h2></Link>
+              <div
+                style={{ display: 'flex', alignItems: 'center', gap: '10px' }}
+              >
+                <Link href={`user/${user._id}`}>
+                  <h2>{user.name}</h2>
+                </Link>
               </div>
             </div>
           </div>
 
-          <div style={{display:'flex', color:'#a7a7a7'}}>
-              <br />
-              {user.message || 'No messages.'}
-              <br />
-              <br />
-          </div>
+          <S.MessageOpened $isUserSender={user.isUserSender}>
+            {/* <div style={{ display: 'flex' }}> */}
+            {user.message || 'No messages.'}
+            {/* {ifUserSender is false - message should be blue 
+                      ifUserSender is true - message should be gray} */}
+            <br />
+            <br />
+            {/* </div> */}
+          </S.MessageOpened>
         </div>
-
-      </MessageCard>
+      </S.MessageCard>
     </>
-  )
-}
+  );
+};
 
 export default MessageChatCard;

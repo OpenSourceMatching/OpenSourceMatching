@@ -41,7 +41,7 @@ const MessageChats = () => {
             image: 'https://randomuser.me/api/portraits/men/67.jpg',
             message: 'Hello',
             date: '2016-10-05T14:48:00.000',
-            isUserSender: false,
+            isUserSender: true,
           },
           {
             otherUserId: 2,
@@ -49,7 +49,7 @@ const MessageChats = () => {
             image: 'https://randomuser.me/api/portraits/women/63.jpg',
             message: 'Thanks for connecting!',
             date: '2016-11-05T14:48:00.000',
-            isUserSender: true,
+            isUserSender: false,
           },
           {
             otherUserId: 3,
@@ -57,7 +57,7 @@ const MessageChats = () => {
             image: 'https://randomuser.me/api/portraits/men/66.jpg',
             message: 'What are you interested in building?',
             date: '2016-11-05T12:48:00.000',
-            isUserSender: true,
+            isUserSender: false,
           },
         ];
         setMessageChats(temp);
@@ -85,7 +85,7 @@ const MessageChats = () => {
 
   return (
     <div>
-      <h2>View All Messages</h2>
+      <h2>Messages</h2>
       <S.MessageCardList>{messageList}</S.MessageCardList>
     </div>
   );
