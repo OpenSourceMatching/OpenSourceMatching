@@ -217,9 +217,11 @@ const UserProfile: React.FC<UserProfileProps> = ({
         {linkedIn && (
           <a
             href={
-              linkedIn.slice(0, 7) === "https://"
-                ? linkedIn
-                : "https://" + linkedIn
+              linkedIn
+                ? linkedIn.startsWith("https://")
+                  ? linkedIn // Use github directly if it starts with 'https://'
+                  : "https://" + linkedIn // Prepend 'https://' if github doesn't start with it
+                : "" // Fallback to an empty string if github is falsy
             }
             target="_blank"
           >
@@ -229,7 +231,11 @@ const UserProfile: React.FC<UserProfileProps> = ({
         {github && (
           <a
             href={
-              github.slice(0, 7) === "https://" ? github : "https://" + github
+              github
+              ? github.startsWith("https://")
+                ? github // Use github directly if it starts with 'https://'
+                : "https://" + github // Prepend 'https://' if github doesn't start with it
+              : "" // Fallback to an empty string if github is falsy
             }
             target="_blank"
           >
@@ -239,9 +245,11 @@ const UserProfile: React.FC<UserProfileProps> = ({
         {personalWebsite && (
           <a
             href={
-              personalWebsite.slice(0, 7) === "https://"
-                ? personalWebsite
-                : "https://" + personalWebsite
+              personalWebsite
+                ? personalWebsite.startsWith("https://")
+                  ? personalWebsite // Use github directly if it starts with 'https://'
+                  : "https://" + personalWebsite // Prepend 'https://' if github doesn't start with it
+                : "" // Fallback to an empty string if github is falsy
             }
             target="_blank"
           >

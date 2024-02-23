@@ -31,8 +31,8 @@ const ProfileList:React.FC<ProfileListProps> = ({search, lookingFor}) => {
   const [loading, setLoading] = useState(true);
 
   const fetchUsers = (search: string) => {
-    console.log('search: ', search);
-    console.log('lookingFor: ', lookingFor);
+    // console.log('search: ', search);
+    // console.log('lookingFor: ', lookingFor);
 
     fetch(`${search || lookingFor ? 
       `/api/allProfiles?searchkeyword=${search}&lookingFor=${lookingFor}`
@@ -40,7 +40,7 @@ const ProfileList:React.FC<ProfileListProps> = ({search, lookingFor}) => {
     .then(res => res.json())
     .then(data => {
       setUsers(data)
-      console.log('user data: ', data);
+      // console.log('user data: ', data);
       setLoading(false);
     })
   }
