@@ -2,13 +2,11 @@ import React from 'react'
 import User from '@models/user'
 import { getAllUserIds, getUserData } from '@utils/getUsers';
 import { notFound } from 'next/navigation';
-import exp from 'constants';
+import UserProfile from '@components/UserProfile';
 
 // Documentation: https://nextjs.org/learn-pages-router/basics/dynamic-routes/implement-getstaticpaths
 
 
-// If I want to revalidate the page every 10 seconds, I can set revalidate to 10. This will cause the page to be re-rendered with the latest data. This is useful when the data is updated at a very high frequency.
-// export const revalidate = 10;
 
 const UserPage = async ( { params }: {params: { id: string}}) => {
   // state for if user is logged in
@@ -18,18 +16,32 @@ const UserPage = async ( { params }: {params: { id: string}}) => {
     return notFound();
   }
 
-  console.log('userData: ', userData);
+  // console.log('userData: ', userData);
 
   // Can use the useParams() hook to get the id from the URL in any child component
 
+  const activeProjectsFormatted = userData.activeProjects.map( (project: any) =>{
+    return {title: project.title, description: project.description}
+  });
+  // console.log('activeProjectsFormatted: ', activeProjectsFormatted);
+
   return (
-    <div>
-      <h1>{userData.name}</h1>
-      <div>{userData.email}</div>
-      <div>{userData.linkedIn}</div>
-      <div>{userData.github}</div>
-      <div>{userData.about}</div>
-    </div>
+    <UserProfile
+    name={userData.name}
+    email={userData.email}
+    personalWebsite={userData.personalWebsite}
+    linkedIn={userData.linkedIn}
+    github={userData.github}
+    about={userData.about}
+    location={userData.location}
+    zip={userData.zip}
+    age= {userData.age}
+    employer={userData.employer}
+    technologies={userData.technologies}
+    lookingFor={userData.lookingFor}
+    activeProjects={activeProjectsFormatted}
+    image={userData.image}
+    />
   )
 }
 

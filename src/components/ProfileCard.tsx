@@ -41,7 +41,7 @@ const ProfileCard = ({user}: any) => {
       <Card>
         <div style={{display:'flex', alignItems:'center'}}>
           <Image
-              src={"" || "profile-placeholder.svg"}
+              src={user.image || "profile-placeholder.svg"}
               height={50}
               width={50}
               alt="Profile Image"
@@ -50,15 +50,15 @@ const ProfileCard = ({user}: any) => {
 
           <div style={{marginLeft:'10px'}}>
             <div style={{display:'flex', alignItems:'center', gap:'10px'}}>
-              <Link href={`user/${user._id}`}><h2>{user.name || `${user.name = 'User Name'}`}</h2></Link>
+              <Link href={`user/${user._id}`}><h2>{user.name}</h2></Link>
               <div style={{color:'grey'}}>
-                <a href={'https://' + user.linkedIn}><FaLinkedin /> | </a>
-                <a href={'https://' + user.github}><FaGithub /> | </a>
-                <a href={'https://' + user.personalWebsite}><FaGlobe /> | </a>
-                <a href={`mailto: ${user.email}`}><FaEnvelope /></a>
+                <a href={'https://' + user.linkedIn} target="_blank"><FaLinkedin /> | </a>
+                <a href={'https://' + user.github} target="_blank"><FaGithub /> | </a>
+                <a href={'https://' + user.personalWebsite} target="_blank"><FaGlobe /> | </a>
+                <a href={`mailto: ${user.email}`} target="_blank"><FaEnvelope /></a>
               </div>
             </div>
-            <div>{user.location || 'San Francisco'}</div>
+            <div>{user.location}</div>
             <div>{user.activeProjects.length} Active Projects</div>
           </div>
           
@@ -74,6 +74,15 @@ const ProfileCard = ({user}: any) => {
             <br />
             <h4>Tech</h4>
             {user.technologies.length ? user.technologies.toString() : 'Javascript, React, Node.js.'}
+            {/* <h4>Active Projects</h4>
+            {user.activeProjects &&
+              user.activeProjects.map((project, index) => {
+                return (
+                  <ul key={index}>
+                    <li>{project.title}: {project.description}</li>
+                  </ul>
+                );
+            })} */}
         </div>
 
       </Card>

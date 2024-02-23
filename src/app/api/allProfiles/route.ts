@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import User from "@/models/user";
 
 // Potential Query Params
+// Ex: http://localhost:3000/api/allProfiles?page=1&searchkeyword=javascript&lookingFor=both
 // Page and limit for pagination
 
 // searchKeyword: string
@@ -15,9 +16,9 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
     const lookingFor = req.nextUrl.searchParams.get('lookingFor');
     const page = Number(req.nextUrl.searchParams.get('page')) || 1;
 
-    console.log('searchKeyword: ', searchKeyword);
-    console.log('lookingFor: ', lookingFor);
-    console.log('page: ', page);
+    // console.log('searchKeyword: ', searchKeyword);
+    // console.log('lookingFor: ', lookingFor);
+    // console.log('page: ', page);
 
     await connectToMongo();
     let allUsers;
@@ -32,11 +33,11 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
         .exec();
 
     } else if (searchKeyword && !lookingFor) {
+      // console.log('searchKeyword: ', searchKeyword);
       allUsers = await User
         .find({
           $or: [
             { technologies: { $in: [searchKeyword] } },
-            { lookingFor: { $in: [searchKeyword] } },
             { 'activeProjects.title': { $in: [searchKeyword] } },
             { 'activeProjects.description': { $in: [searchKeyword] } },
           ],
@@ -76,7 +77,7 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
         .exec();
     }
 
-
+    // console.log('allUsers: ', allUsers);
     return new Response(JSON.stringify(allUsers), {
       status: 200,
     });

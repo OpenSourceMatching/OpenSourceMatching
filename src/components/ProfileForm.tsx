@@ -1,7 +1,7 @@
 'use client'
-import React, {useState, useId} from 'react'
+import { error } from 'console';
+import React, {useState, useId, useEffect} from 'react'
 import styled from 'styled-components';
-import { useSession} from 'next-auth/react';
 
 const FormStyle = styled.form`
   display: flex;
@@ -31,7 +31,20 @@ const ButtonStyle = styled.button`
   cursor: pointer;
   font-size: 16px;
 `
+const ButtonStyleSm = styled.button`
+  padding: 5px 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  font-size: 12px;
+`
 const LabelStyle = styled.label`
+  text-align: left;
+  width: 100%;
+`
+const DivLabelStyle = styled.div`
   text-align: left;
   width: 100%;
 `
@@ -57,7 +70,8 @@ const OptionStyle = styled.option`
   padding: 10px;
 `
 const ProfileForm = () => {
-  const { data: session, status } = useSession();
+  const id = useId();
+  const [message, setMessage] = useState('')
   const [formData, setFormData] = useState(
     {
         linkedIn: "",
@@ -73,45 +87,97 @@ const ProfileForm = () => {
         activeProjects:[]
     }
 )
-const id = useId();
+  useEffect(() =>{
+    fetch('api/myProfile')
+    .then(res => res.json())
+    .then(profileData => {
+      setFormData({
+        linkedIn: profileData.linkedIn || "",
+        github: profileData.github || "",
+        personalWebsite: profileData.personalWebsite || "",
+        about: profileData.about || "",
+        location: profileData.location || "",
+        zip: profileData.zip || "",
+        age: profileData.age || "",
+        employer: profileData.employer || "",
+        technologies: profileData.technologies || [],
+        lookingFor: profileData.lookingFor || "",
+        activeProjects: profileData.activeProjects || []
+    });
+    })
+    .catch(error => {
+      console.error(error)
+    })
+  },[])
 
-function handleChange(event: any) {
-  const {name, value} = event.target
-  setFormData(prevFormData => {
-    return {
+  function handleProjectChange(index, event) {
+    const { name, value } = event.target;
+    const updatedProjects = formData.activeProjects.map((project, i) =>
+        i === index ? { ...project, [name]: value } : project
+    );
+    setFormData({ ...formData, activeProjects: updatedProjects });
+  }
+
+  function addProject() {
+    setFormData({
+        ...formData,
+        activeProjects: [...formData.activeProjects, { title: "", description: "" }]
+    });
+  }
+
+  function removeProject(index) {
+    setFormData({
+        ...formData,
+        activeProjects: formData.activeProjects.filter((_, i) => i !== index)
+    });
+  }
+
+  function handleChange(event: any) {
+    const {name, value} = event.target
+    if(name === 'technologies') {
+      const techArray = value.split(',').map((tech: string) => tech.trim());
+      setFormData(prevFormData => ({
         ...prevFormData,
-        [name]: value
+        [name]: techArray
+      }));
     }
-  })
-}
+    else {
+      setFormData(prevFormData => {
+        return {
+            ...prevFormData,
+            [name]: value
+        }
+      })
+    }
+  }
 
-async function handleSubmit(event: any) {
-    event.preventDefault()
-    const endpoint = `/api/myProfile`;
-    try {
-      const response = await fetch(endpoint, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-      });
-      if(!response.ok) {
-        throw new Error('Failed to patch profile')
+  async function handleSubmit(event: any) {
+      event.preventDefault()
+      const endpoint = `/api/myProfile`;
+      try {
+        const response = await fetch(endpoint, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData)
+        });
+        if(!response.ok) {
+          throw new Error('Failed to patch profile')
+        }
+        const result = await response.json();
+        console.log('Profile Updated:', result)
+        setMessage('Profile Updated!')
       }
-      const result = await response.json();
-      console.log('Profile Updated:', result)
-      alert('Profile Updated!')
-    }
-    catch(error) {
-      console.error('Error Updating Profile:')
-      alert('Error Updating Profile :(')
-    }
-}
+      catch(error) {
+        console.error('Error Updating Profile:')
+        setMessage('Error Updating Profile :(')
+      }
+  }
 
 return (
   <>
-    <h2>Update Your Profile</h2>
+    <h2 style={{textAlign:'center', marginTop:'20px', fontSize:'30px'}}>Update Your Profile</h2>
     <FormStyle onSubmit={handleSubmit}>
       <LabelStyle htmlFor={id + '-linkedIn'}>LinkedIn</LabelStyle>
       <InputStyle
@@ -176,14 +242,14 @@ return (
           value={formData.employer}
           id={id + '-employer'}
       />
-      {/* <LabelStyle htmlFor={id + '-technologies'}>Technologies</LabelStyle>
+      <LabelStyle htmlFor={id + '-technologies'}>Technologies (separate with commas)</LabelStyle>
       <InputStyle
           type="text"
           onChange={handleChange}
           name="technologies"
-          value={formData.technologies}
+          value={formData.technologies.join(", ")}
           id={id + '-technologies'}
-      /> */}
+      />
       <LabelStyle htmlFor={id + '-lookingFor'}>What are you looking for?</LabelStyle>
       <SelectStyle 
           value={formData.lookingFor}
@@ -191,19 +257,36 @@ return (
           name="lookingFor"
           id={id + '-lookingFor'} 
       >
-          <OptionStyle value="myProject">Someone to work on my project</OptionStyle>
-          <OptionStyle value="yourProject">To work on someone elses project</OptionStyle>
-          <OptionStyle value="both">Both</OptionStyle>
+          <OptionStyle value="">--Choose--</OptionStyle>
+          <OptionStyle value="Someone to work on my project">Someone to work on my project</OptionStyle>
+          <OptionStyle value="To work on someone else's project">To work on someone else&apos;s project</OptionStyle>
+          <OptionStyle value="Both">Both</OptionStyle>
       </SelectStyle>
-      <LabelStyle htmlFor={id + '-activeProjects'}>Active Projects</LabelStyle>
-      <InputStyle
-          type="number"
-          onChange={handleChange}
-          name="activeProjects"
-          value={formData.activeProjects}
-          id={id + '-activeProjects'}
-      />
-      <ButtonStyle type='submit'>Update</ButtonStyle>
+      <DivLabelStyle>
+        Active Projects:
+        {formData.activeProjects.map((project, index) => (
+            <div key={index}>
+                <InputStyle
+                    type="text"
+                    name="title"
+                    placeholder="Project Title"
+                    value={project.title}
+                    onChange={(e) => handleProjectChange(index, e)}
+                />
+                <TextAreaStyle
+                    name="description"
+                    placeholder="Project Description"
+                    value={project.description}
+                    onChange={(e) => handleProjectChange(index, e)}
+                />
+                <ButtonStyleSm type="button" onClick={() => removeProject(index)}>X</ButtonStyleSm>
+            </div>
+        ))}
+        <br />
+        <ButtonStyle type="button" onClick={addProject} style={{background:'limegreen'}}>Add a Project</ButtonStyle>
+      </DivLabelStyle>
+      <ButtonStyle type='submit'>Update Profile</ButtonStyle>
+      {message}
     </FormStyle>
   </>
 )

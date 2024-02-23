@@ -32,16 +32,21 @@ const SearchButton = styled.button`
     background-color: maroon;
   }
 `
-const SearchBar = () => {
-  const id = useId();
-  const [search, setSearch] = useState('');
-  const [submittedSearch, setSubmittedSearch] = useState('');
+type SearchBarProps = {
+  setSubmittedSearch: (search: string) => void;
+  setSearch: (search: string) => void;
+  search: string;
+  lookingFor: string;
+}
 
-  function handleChange(event) {
+const SearchBar:React.FC<SearchBarProps> = ({setSubmittedSearch, setSearch, search, lookingFor}) => {
+  const id = useId();
+
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     // console.log('searched Value:',event.target.value)
     setSearch(event.target.value)
   }
-  function handleSubmit(event) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setSubmittedSearch(search);
   }
@@ -54,14 +59,17 @@ const SearchBar = () => {
         <SearchInput
           type="search"
           id={id + '-search'}
-          placeholder='Search by Name'
+          placeholder='Search'
           onChange={handleChange}
           name='search'
           value={search}
         />
         <SearchButton type='submit'>Search</SearchButton>
       </form>
-      <ProfileList search = {search}/>
+      <ProfileList
+        search = {search}
+        lookingFor={lookingFor}
+      />
     </>
   )
 }

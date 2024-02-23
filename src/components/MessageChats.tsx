@@ -3,7 +3,7 @@ import React from 'react'
 
 const MessageChats = () => {
   return (
-    <div>MessageChats</div>
+    <div>View All Messages</div>
   )
 }
 

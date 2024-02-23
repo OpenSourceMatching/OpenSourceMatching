@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import ProfileCard from './ProfileCard'
 import styled from 'styled-components';
+import { set } from 'mongoose';
 
 const Container = styled.div`
   display: flex;
@@ -13,7 +14,12 @@ const Container = styled.div`
   // border: 2px solid red;
 `;
 
-const ProfileList = ({search}: any) => {
+type ProfileListProps = {
+  search: string;
+  lookingFor: string;
+}
+
+const ProfileList:React.FC<ProfileListProps> = ({search, lookingFor}) => {
   type Users = {
     id: number;
     name: string;
@@ -24,23 +30,35 @@ const ProfileList = ({search}: any) => {
   const [users, setUsers] = useState<Users[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetch('/api/allProfiles')
+  const fetchUsers = (search: string) => {
+    console.log('search: ', search);
+    console.log('lookingFor: ', lookingFor);
+
+    fetch(`${search || lookingFor ? 
+      `/api/allProfiles?searchkeyword=${search}&lookingFor=${lookingFor}`
+      : '/api/allProfiles'}`)
     .then(res => res.json())
     .then(data => {
       setUsers(data)
-      // console.log('user data: ', data);
+      console.log('user data: ', data);
       setLoading(false);
     })
-  },[])
+  }
 
-  const filteredUsers = users.filter(user => {
-    const userName =  user.name ? user.name.toLowerCase() : '';
-    return userName.toLowerCase().includes(search.toLowerCase())
-  });
+
+  useEffect(() => {
+    // console.log('search: ', search);
+    // console.log('fetching users: ', `/api/allProfiles?searchkeyword=${search}`);
+    fetchUsers(search);
+  },[search, lookingFor])
+
+  // const filteredUsers = users.filter(user => {
+  //   const userName =  user.name ? user.name.toLowerCase() : '';
+  //   return userName.toLowerCase().includes(search.toLowerCase())
+  // });
 
   // console.log('filtered', filteredUsers)
-  const userList = filteredUsers.map(user => {
+  const userList = users.map(user => {
   return (
     <span style={{alignItems: 'center', display:'flex', justifyContent:'center'}} key={user.email}>
       <ProfileCard user={user}/>

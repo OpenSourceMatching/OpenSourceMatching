@@ -27,7 +27,7 @@ const Navbar = () => {
   return (
     <>
       <NavContainer>
-      <Link href="./" style={{display:'flex', alignItems:'center'}}>
+      <Link href="/" style={{display:'flex', alignItems:'center'}}>
         <Image
           src={'/opensourcematch.png'}
           alt="logo"
@@ -35,7 +35,7 @@ const Navbar = () => {
           height={60}
           style={{borderRadius: '50%'}}
         />
-        <NavItem style={{fontSize:'25px', fontFamily:'monospace'}}>Open Source Match</NavItem>
+        <NavItem style={{fontSize:'25px', fontFamily:'monospace'}}>OpenForge</NavItem>
       </Link>
         <div style={{display:'flex', alignItems:'center'}}>
           <Link href="/"><NavItem>Home</NavItem></Link>
