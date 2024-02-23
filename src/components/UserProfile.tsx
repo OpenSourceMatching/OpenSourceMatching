@@ -215,20 +215,39 @@ const UserProfile: React.FC<UserProfileProps> = ({
       {/* Icons for links */}
       <div style={{ color: "grey" }}>
         {linkedIn && (
-          <a href={linkedIn} target="_blank">
+          <a
+            href={
+              linkedIn.slice(0, 7) === "https://"
+                ? linkedIn
+                : "https://" + linkedIn
+            }
+            target="_blank"
+          >
             <FaLinkedin /> |{" "}
           </a>
         )}
-        {github &&
-          <a href={github} target="_blank">
+        {github && (
+          <a
+            href={
+              github.slice(0, 7) === "https://" ? github : "https://" + github
+            }
+            target="_blank"
+          >
             <FaGithub /> |{" "}
           </a>
-        }
-        {personalWebsite &&
-          <a href={personalWebsite} target="_blank">
+        )}
+        {personalWebsite && (
+          <a
+            href={
+              personalWebsite.slice(0, 7) === "https://"
+                ? personalWebsite
+                : "https://" + personalWebsite
+            }
+            target="_blank"
+          >
             <FaGlobe /> |{" "}
           </a>
-        }
+        )}
         <a href={`mailto: ${email}`} target="_blank">
           <FaEnvelope />
         </a>
@@ -257,7 +276,16 @@ const UserProfile: React.FC<UserProfileProps> = ({
           <div style={{ fontWeight: "bold", color: "#001a00" }}>
             Personal Website:
           </div>
-          <ExternalLink href={personalWebsite || ""} target="_blank">
+          <ExternalLink
+            href={
+              personalWebsite
+                ? personalWebsite.startsWith("https://")
+                  ? personalWebsite // Use github directly if it starts with 'https://'
+                  : "https://" + personalWebsite // Prepend 'https://' if github doesn't start with it
+                : "" // Fallback to an empty string if github is falsy
+            }
+            target="_blank"
+          >
             {personalWebsite}
           </ExternalLink>
         </GridItem>
@@ -265,7 +293,16 @@ const UserProfile: React.FC<UserProfileProps> = ({
         {/* LinkedIn */}
         <GridItem>
           <div style={{ fontWeight: "bold", color: "#001a00" }}>LinkedIn:</div>
-          <ExternalLink href={linkedIn || ""} target="_blank">
+          <ExternalLink
+            href={
+              linkedIn
+                ? linkedIn.startsWith("https://")
+                  ? linkedIn // Use github directly if it starts with 'https://'
+                  : "https://" + linkedIn // Prepend 'https://' if github doesn't start with it
+                : "" // Fallback to an empty string if github is falsy
+            }
+            target="_blank"
+          >
             {linkedIn}
           </ExternalLink>
         </GridItem>
@@ -273,7 +310,16 @@ const UserProfile: React.FC<UserProfileProps> = ({
         {/* GitHub */}
         <GridItem>
           <div style={{ fontWeight: "bold", color: "#001a00" }}>Github:</div>
-          <ExternalLink href={github || ""} target="_blank">
+          <ExternalLink
+            href={
+              github
+                ? github.startsWith("https://")
+                  ? github // Use github directly if it starts with 'https://'
+                  : "https://" + github // Prepend 'https://' if github doesn't start with it
+                : "" // Fallback to an empty string if github is falsy
+            }
+            target="_blank"
+          >
             {github}
           </ExternalLink>
         </GridItem>
