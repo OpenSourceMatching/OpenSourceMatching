@@ -26,7 +26,7 @@ export default function Home() {
   const [lookingFor, setLookingFor] = useState('');
 
   const handleChange = (event: any) => {
-    console.log('event.target.value: ', event.target.value);
+    // console.log('event.target.value: ', event.target.value);
     setLookingFor(event.target.value)
   }
 

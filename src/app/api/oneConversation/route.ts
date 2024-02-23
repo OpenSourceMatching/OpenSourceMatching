@@ -8,7 +8,7 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
   try {
     // get the session
     const session = await getServerSession(authOptions);
-    console.log("session: ", session);
+    // console.log("session: ", session);
     
     if (!session?.user?.email) {
       return NextResponse.json({ message: "User not logged in" }, {

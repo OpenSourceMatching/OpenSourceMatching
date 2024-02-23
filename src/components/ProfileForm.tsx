@@ -166,7 +166,7 @@ const ProfileForm = () => {
           throw new Error('Failed to patch profile')
         }
         const result = await response.json();
-        console.log('Profile Updated:', result)
+        // console.log('Profile Updated:', result)
         setMessage('Profile Updated!')
       }
       catch(error) {
