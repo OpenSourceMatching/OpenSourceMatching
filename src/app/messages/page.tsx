@@ -7,7 +7,7 @@ import React from 'react'
 
 const Messages = () => {
   return (
-    <div style={{paddingLeft:'10px', fontWeight:'bold'}}>
+    <div style={{display:'flex', paddingLeft:'10px', fontWeight:'bold'}}>
       <MessageChats />
       <br />
       <MessageWindow />
