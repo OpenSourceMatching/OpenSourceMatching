@@ -21,7 +21,7 @@ const S = {
 const MessageWindow = () => {
   return (
     <div>
-      Coming Soon
+      {/* Coming Soon */}
     </div>
   )
 };

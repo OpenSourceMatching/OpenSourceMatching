@@ -16,6 +16,7 @@ const MessageCard = styled.div`
   margin: 15px auto;
   &:hover {
     background-color: rgba(227, 227, 227, 0.391);
+    cursor: pointer;
   }
 `;
 
@@ -40,8 +41,8 @@ const MessageChatCard = ({ user }: any) => {
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <Image
             src={user.image || 'profile-placeholder.svg'}
-            height={100}
-            width={100}
+            height={80}
+            width={80}
             alt='Profile Image'
             style={{ borderRadius: '50%', margin: '10px' }}
           />
@@ -55,24 +56,20 @@ const MessageChatCard = ({ user }: any) => {
           }}
         >
           <div style={{ display: 'flex' }}>
-              <div
-                style={{ display: 'flex', alignItems: 'center', gap: '10px' }}
-              >
-                    <h2>
-                      {user.name}
-                    </h2>
-                    <div>
-                      {user.date}
-                    </div>
-
-              </div>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                width: '700px',
+              }}
+            >
+              <div>{user.name}</div>
+              <div>{user.date}</div>
+            </div>
           </div>
 
           <S.MessageOpened $isUserSender={user.isUserSender}>
-            {/* <div style={{ display: 'flex' }}> */}
             {user.message || 'No messages.'}
-            {/* {ifUserSender is false - message should be blue 
-                      ifUserSender is true - message should be gray} */}
             <br />
             <br />
             {/* </div> */}
