@@ -12,7 +12,7 @@ import User from "@/models/user";
 // distance: int - distance in miles (STRETCH)
 export const GET = async (req: NextRequest, res: NextResponse) => {
   try {
-    const searchKeyword = req.nextUrl.searchParams.get('searchkeyword');
+    const searchKeyword = req.nextUrl.searchParams.get('searchkeyword')?.toLowerCase();
     const lookingFor = req.nextUrl.searchParams.get('lookingFor');
     const page = Number(req.nextUrl.searchParams.get('page')) || 1;
 
@@ -40,6 +40,7 @@ export const GET = async (req: NextRequest, res: NextResponse) => {
             { technologies: { $in: [searchKeyword] } },
             { 'activeProjects.title': { $in: [searchKeyword] } },
             { 'activeProjects.description': { $in: [searchKeyword] } },
+            
           ],
         })
         .select('name email _id image linkedIn github personalWebsite about location zip age employer technologies lookingFor activeProjects')
