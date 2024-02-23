@@ -1,10 +1,9 @@
-'use-client'
-import React from 'react'
+'use client';
+
+import React from 'react';
 
 const MessageWindow = () => {
-  return (
-    <div style={{fontStyle:'italic'}}>Coming Soon</div>
-  )
-}
+  return <div style={{ fontStyle: 'italic' }}>Coming Soon</div>;
+};
 
-export default MessageWindow
+export default MessageWindow;

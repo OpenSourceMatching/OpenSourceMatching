@@ -1,4 +1,5 @@
-'use-client'
+'use-client';
+
 import MessageChats from '@components/MessageChats'
 import MessageWindow from '@components/MessageWindow'
 import Sidebar from '@components/Sidebar'
