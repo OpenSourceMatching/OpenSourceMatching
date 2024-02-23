@@ -13,7 +13,7 @@ const MessageCard = styled.div`
   padding: 20px 30px;
   width: 60rem;
   display: flex;
-  margin: 15px auto;
+  margin: 5px auto;
   &:hover {
     background-color: rgba(227, 227, 227, 0.391);
     cursor: pointer;

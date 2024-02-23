@@ -85,7 +85,7 @@ const MessageChats = () => {
 
   return (
     <div>
-      <h2>Messages</h2>
+      <h2 style={{margin:'15px'}}>Messages</h2>
       <S.MessageCardList>{messageList}</S.MessageCardList>
     </div>
   );
