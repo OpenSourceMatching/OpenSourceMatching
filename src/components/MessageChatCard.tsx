@@ -3,7 +3,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
-import Link from 'next/link';
 import { string } from '../../node_modules/joi/lib/index';
 
 const MessageCard = styled.div`
@@ -56,15 +55,17 @@ const MessageChatCard = ({ user }: any) => {
           }}
         >
           <div style={{ display: 'flex' }}>
-            <div>
               <div
                 style={{ display: 'flex', alignItems: 'center', gap: '10px' }}
               >
-                <Link href={`user/${user._id}`}>
-                  <h2>{user.name}</h2>
-                </Link>
+                    <h2>
+                      {user.name}
+                    </h2>
+                    <div>
+                      {user.date}
+                    </div>
+
               </div>
-            </div>
           </div>
 
           <S.MessageOpened $isUserSender={user.isUserSender}>

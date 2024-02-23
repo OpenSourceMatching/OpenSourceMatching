@@ -39,8 +39,8 @@ const MessageChats = () => {
             otherUserId: 1,
             name: 'David Johnson',
             image: 'https://randomuser.me/api/portraits/men/67.jpg',
-            message: 'Hello',
-            date: '2016-10-05T14:48:00.000',
+            message: 'Hey, currently working on a project using Next.js',
+            date: '11:32',
             isUserSender: true,
           },
           {
@@ -48,7 +48,7 @@ const MessageChats = () => {
             name: 'Julia Smith',
             image: 'https://randomuser.me/api/portraits/women/63.jpg',
             message: 'Thanks for connecting!',
-            date: '2016-11-05T14:48:00.000',
+            date: '09:46',
             isUserSender: false,
           },
           {
@@ -56,7 +56,7 @@ const MessageChats = () => {
             name: 'Alex Williams',
             image: 'https://randomuser.me/api/portraits/men/66.jpg',
             message: 'What are you interested in building?',
-            date: '2016-11-05T12:48:00.000',
+            date: '17:23',
             isUserSender: false,
           },
         ];
