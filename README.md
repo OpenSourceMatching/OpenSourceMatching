@@ -1,8 +1,5 @@
-<div style="display:flex;" >
-  <img src='./public/winner.svg'>
-
-  <h3>DeveloperWeek 2024 Hackathon Challenge Winner</h3>
-</div>
+| ![Winner Badge](./public/winner.svg) | DeveloperWeek 2024 Hackathon Challenge Winner |
+|--------------------------------------|--------------------------------------------------|
 
 *The nation's largest challenge-driven in-person and online hackathon*
 
